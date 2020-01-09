@@ -1,0 +1,61 @@
+﻿@model TechnoForest.Models.ShopingCarts.SearchResultsViewModel
+
+@{
+    ViewData["Title"] = "CheckMyShopping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Check My Shopping</h1>
+
+<p>
+    You have @Model.Result.Count() results!
+</p>
+@{
+    var sum = Model.Result
+        .Select(pr => pr.TotalPrice);
+
+    decimal? resultOfTotalPrice = sum.Last();
+
+    <p>
+        Sum of result is: @resultOfTotalPrice BGN
+    </p>
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Phone Model</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Result)
+        {
+
+            @if (item.MobilePhones != null && item.MobilePhones.IsBought == false)
+            {
+                <tr>
+                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td>Price for product is: @item.MobilePhones.Price</td>
+                </tr>
+
+            }
+
+            @if (item.TVs != null && item.MobilePhones.IsBought == false)
+            {
+                <tr>
+                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td>Price for product is: @item.TVs.Price</td>
+                </tr>
+            }
+
+            @if (item.WashingMachines != null && item.MobilePhones.IsBought == false)
+            {
+                <tr>
+                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td>Price for product is: @item.WashingMachines.Price</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

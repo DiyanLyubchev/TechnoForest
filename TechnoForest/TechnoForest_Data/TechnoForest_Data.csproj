@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200107171436_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200107171436_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108091550_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108091550_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108101535_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108101535_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108102851_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108102851_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108104641_SeedPhone.cs" />
+    <Compile Remove="Migrations\20200108104641_SeedPhone.Designer.cs" />
+    <Compile Remove="Migrations\20200108105347_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108105347_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108120108_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108120108_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108130218_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108130218_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200108130404_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200108130404_InitialMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>
