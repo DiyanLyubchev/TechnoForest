@@ -1,5 +1,6 @@
 ﻿.home-Page-Phone {
-    width: 195px;
-    height: 250px;
-    margin-left: 30px
+    max-width: 60%;
+    max-height: 60%;
+    display: block;
+    margin: auto auto;
 }

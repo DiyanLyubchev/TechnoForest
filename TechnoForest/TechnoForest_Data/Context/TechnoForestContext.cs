@@ -23,6 +23,7 @@ namespace TechnoForest_Data.Context
         {
             modelBuilder.SeedMobilePhone();
             modelBuilder.SeedWhashingMachine();
+            modelBuilder.SeedTv();
             base.OnModelCreating(modelBuilder);
         }
     }

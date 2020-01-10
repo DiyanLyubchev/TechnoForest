@@ -4,21 +4,18 @@
     ViewData["Title"] = "CheckMyShopping";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Check My Shopping</h1>
-
-<p>
+<h1>
     You have @Model.Result.Count() results!
-</p>
+</h1>
 @{
     var sum = Model.Result
         .Select(pr => pr.TotalPrice);
 
     decimal? resultOfTotalPrice = sum.Last();
 
-    <p>
-        Sum of result is: @resultOfTotalPrice BGN
-    </p>
+    <h5>
+        Sum of result is: <span style="color:green">@resultOfTotalPrice</span> BGN
+    </h5>
 }
 <table class="table table-hover">
     <thead>

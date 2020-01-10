@@ -3,25 +3,33 @@
 }
 
 <body>
-    <div style="height: 100%; border-color:green;   border-style: solid;">
-        <div style="   width: 100%; height:260px; border-color:red; border-style: solid;">
+    <div style="height: 100%; border-color:green; border-style:solid;">
+        <div style="   width: 100%; height:260px;" @*border-color:red; border-style: solid;*@>
 
-            <div style=" width: 25%;   height: 250px;    float: left;  border-color:yellow; border-style: solid;">
-                <a asp-controller="Product" asp-action="ShowMobilePhone">
+            <div style="width:33%; height:250px; float:left; justify-content:space-between;">
+                <a class="text-center" style="display: block; margin-left: auto; margin-right:auto;" asp-controller="Product" asp-action="ShowMobilePhone">
                     <img class="home-Page-Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
                 </a>
             </div>
 
-
-            <div style=" width: 25%;   height: 250px;  float: right;  border-color:darkslategrey; border-style: solid;">
-                <a asp-controller="Product" asp-action="ShowWashingMachine">
-                    <img class="home-Page-Phone" src="~/Images/WashingMachine.png" />
+            <div style=" width:33%;   height:250px;  float: right; justify-content:space-between;">
+                <a style="display: block; margin-left: auto; margin-right:auto;" asp-controller="Product" asp-action="ShowWashingMachine">
+                    <img class="home-Page-Phone" src="~/Images/LG-9-KG-Auto-Washing-Machine-Front-Loading.jpg" />
                 </a>
             </div>
-        </div>
-        <div style="   width: 100%; height:30px; border-color:red; border-style: solid;">
 
-            <div style=" width: 25%;   height: 30px;  float: left;  border-color:black; border-style: solid;">
+            <div style=" width: 33%; height:250px;  float:right; justify-content:space-between;">
+                <a asp-controller="Product" asp-action="ShowTv" style="display: block; margin-left: auto; margin-right:auto;">
+                    <img class="home-Page-Phone" src="~/Images/TvHomePage.jpg" />
+                </a>
+
+            </div>
+
+
+        </div>
+        <div style="width:100%; height:30px;">
+
+            <div style=" width: 33%; height:30px; float:left;">
                 <strong>
                     <a asp-controller="Product" asp-action="ShowMobilePhone">
                         <p class="text-center">
@@ -31,7 +39,7 @@
                 </strong>
             </div>
 
-            <div style=" width: 25%;   height: 30px;    float: right;  border-color:brown; border-style: solid;">
+            <div style=" width:33%; height:30px; float:right;">
                 <strong>
                     <a asp-controller="Product" asp-action="ShowWashingMachine">
                         <p class="text-center">
@@ -40,9 +48,19 @@
                     </a>
                 </strong>
             </div>
+
+            <div style=" width:33%; height:30px; float:right;">
+                <strong>
+                    <a asp-controller="Product" asp-action="ShowTv">
+                        <p class="text-center">
+                            TV
+                        </p>
+                    </a>
+                </strong>
+            </div>
         </div>
 
-        <div style=" height: 300px; width: 450px;  border-color:red; border-style: solid;">
+        <div style="height:300px; width:450px;  border-color:red; border-style: solid;">
 
         </div>
     </div>
