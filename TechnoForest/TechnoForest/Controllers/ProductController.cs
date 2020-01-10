@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TechnoForest.Models.Product;
+using TechnoForest.Models.Product.WashingMashines;
 using TechnoForest_Service.Core;
 using TechnoForest_Service.Dto;
 
@@ -29,7 +30,7 @@ namespace TechnoForest.Controllers
         }
 
         [Authorize]
-        [HttpGet("{id:int}")]
+        [HttpGet]
         public async Task<IActionResult> AddPhoneToCart(int id)
         {
             var dto = new MobilePhoneDto
@@ -37,10 +38,35 @@ namespace TechnoForest.Controllers
                 PhoneId = id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
-          
+
             await this.shopping.AddMobilePhoneToCartAsync(dto);
 
             return RedirectToAction("ShowMobilePhone", "Product");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ShowWashingMachine()
+        {
+            var allWashingMachine = await this.service.GetAllWashingMachineAsync();
+
+            var listWashingMachine = new ListWashingMachineViewModel(allWashingMachine);
+
+            return View(listWashingMachine);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AddWashingMachineToCart(int id)
+        {
+            var dto = new WashingMachineDto
+            {
+                WashingMichineId = id,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            await this.shopping.AddWashingMachineToCartAsync(dto);
+
+            return RedirectToAction("ShowWashingMachine", "Product");
         }
     }
 }

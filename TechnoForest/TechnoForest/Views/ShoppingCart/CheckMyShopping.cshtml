@@ -40,18 +40,18 @@
 
             }
 
-            @if (item.TVs != null && item.MobilePhones.IsBought == false)
+            @if (item.TVs != null && item.TVs.IsBought == false)
             {
                 <tr>
-                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td>@item.TVs.ProductName - @item.TVs.Model</td>
                     <td>Price for product is: @item.TVs.Price</td>
                 </tr>
             }
 
-            @if (item.WashingMachines != null && item.MobilePhones.IsBought == false)
+            @if (item.WashingMachines != null && item.WashingMachines.IsBought == false)
             {
                 <tr>
-                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td>@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
                     <td>Price for product is: @item.WashingMachines.Price</td>
                 </tr>
             }

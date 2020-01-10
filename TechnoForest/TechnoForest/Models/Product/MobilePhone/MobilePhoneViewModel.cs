@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TechnoForest_Data.Entity;
+﻿using TechnoForest_Data.Entity;
 
 namespace TechnoForest.Models.Product
 {

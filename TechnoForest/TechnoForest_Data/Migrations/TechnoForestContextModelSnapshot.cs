@@ -178,9 +178,6 @@ namespace TechnoForest_Data.Migrations
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.Property<double?>("SizeOfDisplay")
                         .HasColumnType("float");
 
@@ -188,10 +185,6 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShoppingCartId")
-                        .IsUnique()
-                        .HasFilter("[ShoppingCartId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -245,6 +238,18 @@ namespace TechnoForest_Data.Migrations
                             Price = 1849.99m,
                             ProductName = "Iphone",
                             SizeOfDisplay = 5.7999999999999998
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Color = "Pink",
+                            IsBought = false,
+                            Memory = "64 GB",
+                            Model = "X",
+                            Picture = "~/images/Xgray.jpg",
+                            Price = 2049.99m,
+                            ProductName = "Iphone",
+                            SizeOfDisplay = 5.7999999999999998
                         });
                 });
 
@@ -258,15 +263,36 @@ namespace TechnoForest_Data.Migrations
                     b.Property<DateTime?>("AddTOCart")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("MobilePhoneId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TVsId")
+                        .HasColumnType("int");
+
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("WashingMachineId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("MobilePhoneId")
+                        .IsUnique()
+                        .HasFilter("[MobilePhoneId] IS NOT NULL");
+
+                    b.HasIndex("TVsId")
+                        .IsUnique()
+                        .HasFilter("[TVsId] IS NOT NULL");
+
                     b.HasIndex("UserId");
+
+                    b.HasIndex("WashingMachineId")
+                        .IsUnique()
+                        .HasFilter("[WashingMachineId] IS NOT NULL");
 
                     b.ToTable("ShoppingCarts");
                 });
@@ -290,9 +316,6 @@ namespace TechnoForest_Data.Migrations
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.Property<double?>("Size")
                         .HasColumnType("float");
 
@@ -300,10 +323,6 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShoppingCartId")
-                        .IsUnique()
-                        .HasFilter("[ShoppingCartId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -391,14 +410,14 @@ namespace TechnoForest_Data.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -408,13 +427,56 @@ namespace TechnoForest_Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShoppingCartId")
-                        .IsUnique()
-                        .HasFilter("[ShoppingCartId] IS NOT NULL");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("WashingMachines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsBought = false,
+                            Model = "WW70K44305W",
+                            Price = 609m,
+                            ProductName = "Samsung",
+                            WashingCapacity = 7
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsBought = false,
+                            Model = "WMY81483LMB1",
+                            Price = 669.99m,
+                            ProductName = "Beko",
+                            WashingCapacity = 8
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsBought = false,
+                            Model = "L9WBA61B",
+                            Price = 2899.99m,
+                            ProductName = "AEG",
+                            WashingCapacity = 9
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsBought = false,
+                            Model = "TDLR 70210",
+                            Price = 599m,
+                            ProductName = "Whirlpool",
+                            WashingCapacity = 8
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsBought = false,
+                            Model = "F2J6HM0W",
+                            Price = 799m,
+                            ProductName = "LG",
+                            WashingCapacity = 7
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -470,10 +532,6 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.MobilePhone", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.ShoppingCart", "ShoppingCart")
-                        .WithOne("MobilePhones")
-                        .HasForeignKey("TechnoForest_Data.Entity.MobilePhone", "ShoppingCartId");
-
                     b.HasOne("TechnoForest_Data.Entity.User", null)
                         .WithMany("MobilePhones")
                         .HasForeignKey("UserId");
@@ -481,17 +539,25 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.ShoppingCart", b =>
                 {
+                    b.HasOne("TechnoForest_Data.Entity.MobilePhone", "MobilePhones")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "MobilePhoneId");
+
+                    b.HasOne("TechnoForest_Data.Entity.TV", "TVs")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "TVsId");
+
                     b.HasOne("TechnoForest_Data.Entity.User", "User")
                         .WithMany("ShoppingCarts")
                         .HasForeignKey("UserId");
+
+                    b.HasOne("TechnoForest_Data.Entity.WashingMachine", "WashingMachines")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "WashingMachineId");
                 });
 
             modelBuilder.Entity("TechnoForest_Data.Entity.TV", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.ShoppingCart", "ShoppingCart")
-                        .WithOne("TVs")
-                        .HasForeignKey("TechnoForest_Data.Entity.TV", "ShoppingCartId");
-
                     b.HasOne("TechnoForest_Data.Entity.User", null)
                         .WithMany("TVs")
                         .HasForeignKey("UserId");
@@ -499,10 +565,6 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.WashingMachine", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.ShoppingCart", "ShoppingCart")
-                        .WithOne("WashingMachines")
-                        .HasForeignKey("TechnoForest_Data.Entity.WashingMachine", "ShoppingCartId");
-
                     b.HasOne("TechnoForest_Data.Entity.User", null)
                         .WithMany("WashingMachines")
                         .HasForeignKey("UserId");
