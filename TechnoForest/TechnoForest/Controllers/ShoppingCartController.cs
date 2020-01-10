@@ -30,9 +30,6 @@ namespace TechnoForest.Controllers
             var myCart = (await this.service.CurrentUserShoppingAsync(user))
               .Select(shopping => new ShoppingCartViewModel(shopping));
 
-
-            var stop = 0;
-
             var results = new SearchResultsViewModel(myCart);
 
             return View("CheckMyShopping", results);

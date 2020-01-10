@@ -22,6 +22,7 @@ namespace TechnoForest_Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedMobilePhone();
+            modelBuilder.SeedWhashingMachine();
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -2,24 +2,43 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-    </div>
-    <img src="~/images/SonyTv.jpg" alt="Sample Photo" />*@
 <body>
     <div style="height: 100%; border-color:green;   border-style: solid;">
-        <div style="   width: 100%; height:400px; border-color:red; border-style: solid;">
+        <div style="   width: 100%; height:260px; border-color:red; border-style: solid;">
 
-            <div style=" width: 50%;   height: 400px;    float: left;  border-color:yellow; border-style: solid;">
-                <a asp-controller="Product" asp-action="ShowMobilePhone" >
-                    <img class="Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
+            <div style=" width: 25%;   height: 250px;    float: left;  border-color:yellow; border-style: solid;">
+                <a asp-controller="Product" asp-action="ShowMobilePhone">
+                    <img class="home-Page-Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
                 </a>
             </div>
 
-            <div style=" width: 50%;   height: 400px;  float: right;  border-color:darkslategrey; border-style: solid;">
 
+            <div style=" width: 25%;   height: 250px;  float: right;  border-color:darkslategrey; border-style: solid;">
+                <a asp-controller="Product" asp-action="ShowWashingMachine">
+                    <img class="home-Page-Phone" src="~/Images/WashingMachine.png" />
+                </a>
+            </div>
+        </div>
+        <div style="   width: 100%; height:30px; border-color:red; border-style: solid;">
 
+            <div style=" width: 25%;   height: 30px;  float: left;  border-color:black; border-style: solid;">
+                <strong>
+                    <a asp-controller="Product" asp-action="ShowMobilePhone">
+                        <p class="text-center">
+                            Mobile Phone
+                        </p>
+                    </a>
+                </strong>
+            </div>
 
+            <div style=" width: 25%;   height: 30px;    float: right;  border-color:brown; border-style: solid;">
+                <strong>
+                    <a asp-controller="Product" asp-action="ShowWashingMachine">
+                        <p class="text-center">
+                            Washing Machine
+                        </p>
+                    </a>
+                </strong>
             </div>
         </div>
 

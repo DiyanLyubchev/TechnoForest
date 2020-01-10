@@ -154,27 +154,6 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
-                    TotalPrice = table.Column<decimal>(nullable: true),
-                    AddTOCart = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MobilePhones",
                 columns: table => new
                 {
@@ -188,18 +167,11 @@ namespace TechnoForest_Data.Migrations
                     Price = table.Column<decimal>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
                     IsBought = table.Column<bool>(nullable: false),
-                    ShoppingCartId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MobilePhones", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MobilePhones_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MobilePhones_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -219,18 +191,11 @@ namespace TechnoForest_Data.Migrations
                     Size = table.Column<double>(nullable: true),
                     Price = table.Column<decimal>(nullable: true),
                     IsBought = table.Column<bool>(nullable: false),
-                    ShoppingCartId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TVs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TVs_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TVs_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -249,19 +214,13 @@ namespace TechnoForest_Data.Migrations
                     Model = table.Column<string>(nullable: true),
                     WashingCapacity = table.Column<int>(nullable: true),
                     Price = table.Column<decimal>(nullable: true),
+                    Picture = table.Column<string>(nullable: true),
                     IsBought = table.Column<bool>(nullable: false),
-                    ShoppingCartId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WashingMachines", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WashingMachines_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_WashingMachines_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -270,15 +229,70 @@ namespace TechnoForest_Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    TVsId = table.Column<int>(nullable: true),
+                    WashingMachineId = table.Column<int>(nullable: true),
+                    MobilePhoneId = table.Column<int>(nullable: true),
+                    TotalPrice = table.Column<decimal>(nullable: true),
+                    AddTOCart = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_MobilePhones_MobilePhoneId",
+                        column: x => x.MobilePhoneId,
+                        principalTable: "MobilePhones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_TVs_TVsId",
+                        column: x => x.TVsId,
+                        principalTable: "TVs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_WashingMachines_WashingMachineId",
+                        column: x => x.WashingMachineId,
+                        principalTable: "WashingMachines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "MobilePhones",
-                columns: new[] { "Id", "Color", "IsBought", "Memory", "Model", "Picture", "Price", "ProductName", "ShoppingCartId", "SizeOfDisplay", "UserId" },
+                columns: new[] { "Id", "Color", "IsBought", "Memory", "Model", "Picture", "Price", "ProductName", "SizeOfDisplay", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", null, 5.5, null },
-                    { 2, "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", null, 5.5, null },
-                    { 3, "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", null, 5.5, null },
-                    { 4, "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", null, 5.7999999999999998, null }
+                    { 1, "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
+                    { 2, "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { 3, "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { 4, "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
+                    { 5, "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "WashingMachines",
+                columns: new[] { "Id", "IsBought", "Model", "Picture", "Price", "ProductName", "UserId", "WashingCapacity" },
+                values: new object[,]
+                {
+                    { 1, false, "WW70K44305W", null, 609m, "Samsung", null, 7 },
+                    { 2, false, "WMY81483LMB1", null, 669.99m, "Beko", null, 8 },
+                    { 3, false, "L9WBA61B", null, 2899.99m, "AEG", null, 9 },
+                    { 4, false, "TDLR 70210", null, 599m, "Whirlpool", null, 8 },
+                    { 5, false, "F2J6HM0W", null, 799m, "LG", null, 7 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -321,16 +335,23 @@ namespace TechnoForest_Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MobilePhones_ShoppingCartId",
-                table: "MobilePhones",
-                column: "ShoppingCartId",
-                unique: true,
-                filter: "[ShoppingCartId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MobilePhones_UserId",
                 table: "MobilePhones",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_MobilePhoneId",
+                table: "ShoppingCarts",
+                column: "MobilePhoneId",
+                unique: true,
+                filter: "[MobilePhoneId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_TVsId",
+                table: "ShoppingCarts",
+                column: "TVsId",
+                unique: true,
+                filter: "[TVsId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_UserId",
@@ -338,23 +359,16 @@ namespace TechnoForest_Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TVs_ShoppingCartId",
-                table: "TVs",
-                column: "ShoppingCartId",
+                name: "IX_ShoppingCarts_WashingMachineId",
+                table: "ShoppingCarts",
+                column: "WashingMachineId",
                 unique: true,
-                filter: "[ShoppingCartId] IS NOT NULL");
+                filter: "[WashingMachineId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TVs_UserId",
                 table: "TVs",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WashingMachines_ShoppingCartId",
-                table: "WashingMachines",
-                column: "ShoppingCartId",
-                unique: true,
-                filter: "[ShoppingCartId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WashingMachines_UserId",
@@ -380,6 +394,12 @@ namespace TechnoForest_Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "MobilePhones");
 
             migrationBuilder.DropTable(
@@ -387,12 +407,6 @@ namespace TechnoForest_Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "WashingMachines");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
