@@ -7,5 +7,7 @@ namespace TechnoForest_Service.Core
     {
         Task AddMobilePhoneToCartAsync(MobilePhoneDto dto);
         Task AddWashingMachineToCartAsync(WashingMachineDto dto);
+
+        Task AddTvToCartAsync(TvDto dto);
     }
 }

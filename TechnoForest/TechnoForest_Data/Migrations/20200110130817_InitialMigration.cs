@@ -284,6 +284,18 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "TVs",
+                columns: new[] { "Id", "IsBought", "Model", "Price", "ProductName", "Size", "UserId" },
+                values: new object[,]
+                {
+                    { 1, false, "KD55XG8196BAEP", 1389m, "Sony", 55.0, null },
+                    { 2, false, "BRAVIA", 2899m, "Sony", 55.0, null },
+                    { 3, false, "43LK5100PLA", 428m, "LG", 43.0, null },
+                    { 4, false, "70UI9362E", 1449.99m, "Sharp", 70.0, null },
+                    { 5, false, "32PFS4132/12", 388m, "PHILIPS", 32.0, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "WashingMachines",
                 columns: new[] { "Id", "IsBought", "Model", "Picture", "Price", "ProductName", "UserId", "WashingCapacity" },
                 values: new object[,]

@@ -7,17 +7,71 @@ namespace TechnoForest_Data.Seed
     {
         public static void SeedMobilePhone(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MobilePhone>().HasData(SeedPhone());
-           
+            modelBuilder.Entity<MobilePhone>().HasData(MobilePhone());
+
 
         }
         public static void SeedWhashingMachine(this ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<WashingMachine>().HasData(SeedWashingMashine());
+            modelBuilder.Entity<WashingMachine>().HasData(WashingMachine());
 
         }
-        private static WashingMachine[] SeedWashingMashine()
+        public static void SeedTv(this ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<TV>().HasData(TV());
+
+        }
+
+        private static TV[] TV()
+        {
+            return new TV[]
+            {
+                new TV
+                {
+                   Id=1,
+                   ProductName= "Sony",
+                   Model= "KD55XG8196BAEP",
+                   Size= 55,
+                   Price= 1389m
+                },
+                new TV
+                {
+                   Id=2,
+                   ProductName= "Sony",
+                   Model= "BRAVIA",
+                   Size= 55,
+                   Price= 2899m
+                },
+                new TV
+                {
+                   Id=3,
+                   ProductName ="LG",
+                   Model= "43LK5100PLA",
+                   Size= 43,
+                   Price= 428m
+                },
+                new TV
+                {
+                   Id=4,
+                   ProductName ="Sharp",
+                   Model= "70UI9362E",
+                   Size= 70,
+                   Price= 1449.99m
+                },
+                new TV
+                {
+                   Id=5,
+                   ProductName ="PHILIPS",
+                   Model= "32PFS4132/12",
+                   Size= 32,
+                   Price= 388m
+                },
+            };
+        }
+
+        private static WashingMachine[] WashingMachine()
         {
             return new WashingMachine[]
                 {
@@ -63,7 +117,7 @@ namespace TechnoForest_Data.Seed
                     },
                 };
         }
-        private static MobilePhone[] SeedPhone()
+        private static MobilePhone[] MobilePhone()
         {
             return new MobilePhone[]
                 {

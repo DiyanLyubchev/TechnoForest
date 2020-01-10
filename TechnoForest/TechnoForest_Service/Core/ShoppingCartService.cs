@@ -17,6 +17,51 @@ namespace TechnoForest_Service.Core
         {
             this.context = context;
         }
+        public async Task AddTvToCartAsync(TvDto dto)
+        {
+            if (dto.TvId == 0)
+            {
+                throw new ProductExeption("Tv does not exist!");
+            }
+
+            var tv = await this.context.TVs
+                 .FirstOrDefaultAsync(tvId => tvId.Id == dto.TvId);
+
+            var currentUser = await this.context.Users
+                .FirstOrDefaultAsync(id => id.Id == dto.UserId);
+
+            var tvPrice = await this.context.TVs
+                .Where(tVId => tVId.Id == dto.TvId)
+                .Select(price => price.Price)
+                .SingleOrDefaultAsync();
+
+
+            var shoppingTv = await this.context.ShoppingCarts
+                .Where(user => user.UserId == dto.UserId)
+                .Select(price => price.TotalPrice).ToListAsync();
+
+            decimal? newPriceTv = null;
+            if (shoppingTv.Count() != 0)
+            {
+                newPriceTv = shoppingTv.Last() + tvPrice;
+            }
+            else
+            {
+                newPriceTv = tvPrice;
+            }
+
+            var cart = new ShoppingCart
+            {
+                TVs = tv,
+                User = currentUser,
+                UserId = dto.UserId,
+                AddTOCart = DateTime.Now,
+                TotalPrice = newPriceTv
+            };
+
+            await this.context.ShoppingCarts.AddAsync(cart);
+            await this.context.SaveChangesAsync();
+        }
 
         public async Task AddMobilePhoneToCartAsync(MobilePhoneDto dto)
         {
@@ -44,9 +89,9 @@ namespace TechnoForest_Service.Core
             decimal? newPricePhone = null;
             if (shoppingPhone.Count() != 0)
             {
-                 newPricePhone = shoppingPhone.Last() + phonePrice;
+                newPricePhone = shoppingPhone.Last() + phonePrice;
             }
-            else 
+            else
             {
                 newPricePhone = phonePrice;
             }
@@ -68,7 +113,7 @@ namespace TechnoForest_Service.Core
         {
             if (dto.WashingMichineId == 0)
             {
-                throw new ProductExeption("Phone does not exist!");
+                throw new ProductExeption("Washing machine does not exist!");
             }
 
             var washingMachine = await this.context.WashingMachines
@@ -77,7 +122,7 @@ namespace TechnoForest_Service.Core
             var currentUser = await this.context.Users
                 .FirstOrDefaultAsync(id => id.Id == dto.UserId);
 
-            var phonePrice = await this.context.WashingMachines
+            var washingMachinePrice = await this.context.WashingMachines
                 .Where(wMachineId => wMachineId.Id == dto.WashingMichineId)
                 .Select(price => price.Price)
                 .SingleOrDefaultAsync();
@@ -90,11 +135,11 @@ namespace TechnoForest_Service.Core
             decimal? newPriceWashingMachine = null;
             if (shoppingWashingMachine.Count() != 0)
             {
-                newPriceWashingMachine = shoppingWashingMachine.Last() + phonePrice;
+                newPriceWashingMachine = shoppingWashingMachine.Last() + washingMachinePrice;
             }
             else
             {
-                newPriceWashingMachine = phonePrice;
+                newPriceWashingMachine = washingMachinePrice;
             }
 
             var cart = new ShoppingCart

@@ -1,0 +1,41 @@
+﻿@model TechnoForest.Models.Product.TVs.ListTvsViewModel
+
+@{
+    ViewData["Title"] = "ViewShowTv";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Security.Claims;
+<p>Result: @Model.Tvs.Count()</p>
+
+<strong>
+    <a class="goback" style="color: #0094ff" href="javascript:history.go(-1)" title="Go to previous page">Go back</a>
+</strong>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Tv Model</th>
+            <th scope="col"> Diagonal display</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tv in Model.Tvs)
+        {
+            <tr>
+                <td>
+                    <img class="TV" src="~/Images/TvShowRoom.jpg" />
+                </td>
+                <td>@tv.ProductName - @tv.Model</td>
+                <td>@tv.Size sm</td>
+                <td>@tv.Price</td>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> <a asp-controller="Product" asp-action="AddTvToCart" asp-route-id="@tv.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

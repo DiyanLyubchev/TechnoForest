@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TechnoForest.Models.Product;
+using TechnoForest.Models.Product.TVs;
 using TechnoForest.Models.Product.WashingMashines;
 using TechnoForest_Service.Core;
 using TechnoForest_Service.Dto;
@@ -19,7 +20,7 @@ namespace TechnoForest.Controllers
             this.shopping = shopping;
         }
 
-        [Authorize]
+
         public async Task<IActionResult> ShowMobilePhone()
         {
             var allMobilePhone = await this.service.GetAllMobilePhoneAsync();
@@ -44,7 +45,7 @@ namespace TechnoForest.Controllers
             return RedirectToAction("ShowMobilePhone", "Product");
         }
 
-        [Authorize]
+
         public async Task<IActionResult> ShowWashingMachine()
         {
             var allWashingMachine = await this.service.GetAllWashingMachineAsync();
@@ -68,5 +69,31 @@ namespace TechnoForest.Controllers
 
             return RedirectToAction("ShowWashingMachine", "Product");
         }
+
+        public async Task<IActionResult> ShowTv()
+        {
+            var allTvs = await this.service.GetAllTVAsync();
+
+            var listTvs = new ListTvsViewModel(allTvs);
+
+            return View(listTvs);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AddTvToCart(int id)
+        {
+            var dto = new TvDto
+            {
+                TvId = id,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            await this.shopping.AddTvToCartAsync(dto);
+
+            return RedirectToAction("ShowTv", "Product");
+        }
+
     }
 }

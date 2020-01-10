@@ -77,6 +77,10 @@ body {
     width: 200px;
     height: 250px;
 }
+.TV {
+    width: 250px;
+    height: 150px;
+}
 
 #phoneButton {
     border: solid;

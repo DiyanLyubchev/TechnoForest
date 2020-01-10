@@ -327,6 +327,53 @@ namespace TechnoForest_Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TVs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsBought = false,
+                            Model = "KD55XG8196BAEP",
+                            Price = 1389m,
+                            ProductName = "Sony",
+                            Size = 55.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsBought = false,
+                            Model = "BRAVIA",
+                            Price = 2899m,
+                            ProductName = "Sony",
+                            Size = 55.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsBought = false,
+                            Model = "43LK5100PLA",
+                            Price = 428m,
+                            ProductName = "LG",
+                            Size = 43.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsBought = false,
+                            Model = "70UI9362E",
+                            Price = 1449.99m,
+                            ProductName = "Sharp",
+                            Size = 70.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsBought = false,
+                            Model = "32PFS4132/12",
+                            Price = 388m,
+                            ProductName = "PHILIPS",
+                            Size = 32.0
+                        });
                 });
 
             modelBuilder.Entity("TechnoForest_Data.Entity.User", b =>
