@@ -17,7 +17,8 @@ namespace TechnoForest_Service.Core
         {
             this.context = context;
         }
-        public async Task AddTvToCartAsync(TvDto dto)
+
+        public async Task<bool> AddTvToCartAsync(TvDto dto)
         {
             if (dto.TvId == 0)
             {
@@ -61,9 +62,11 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task AddMobilePhoneToCartAsync(MobilePhoneDto dto)
+        public async Task<bool> AddMobilePhoneToCartAsync(MobilePhoneDto dto)
         {
             if (dto.PhoneId == 0)
             {
@@ -107,9 +110,11 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task AddWashingMachineToCartAsync(WashingMachineDto dto)
+        public async Task<bool> AddWashingMachineToCartAsync(WashingMachineDto dto)
         {
             if (dto.WashingMichineId == 0)
             {
@@ -153,6 +158,8 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

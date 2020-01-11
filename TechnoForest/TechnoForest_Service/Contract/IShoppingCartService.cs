@@ -5,9 +5,9 @@ namespace TechnoForest_Service.Core
 {
     public interface IShoppingCartService
     {
-        Task AddMobilePhoneToCartAsync(MobilePhoneDto dto);
-        Task AddWashingMachineToCartAsync(WashingMachineDto dto);
+        Task<bool> AddMobilePhoneToCartAsync(MobilePhoneDto dto);
+        Task<bool> AddWashingMachineToCartAsync(WashingMachineDto dto);
 
-        Task AddTvToCartAsync(TvDto dto);
+        Task<bool> AddTvToCartAsync(TvDto dto);
     }
 }
