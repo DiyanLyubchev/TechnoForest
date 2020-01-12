@@ -25,6 +25,86 @@ namespace TechnoForest_Data.Seed
 
         }
 
+        public static void SeedFridge(this ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Fridge>().HasData(Fridges());
+
+        }
+
+
+        private static Fridge[] Fridges()
+        {
+            return new Fridge[]
+            {
+                new Fridge
+                {
+                     Id ="42a046da-3717-4c47-88b8-defacf39499e",
+                     ProductName = "VESTFROST",
+                     Model ="VFD 263",
+                     TotalCapacity=213,
+                     CapacityRefrigerator=171,
+                     CapacityFreezer =42,
+                     Height =144.00,
+                     Width=54.00,
+                     Color = "White",
+                     Price=355m
+                },
+                new Fridge
+                {
+                     Id ="56780700-4a74-4ce0-bc55-893f5d8cd4ca",
+                     ProductName = "SNAIGE",
+                     Model ="RF 36SM-Z/P1CB27",
+                     TotalCapacity=317,
+                     CapacityRefrigerator=229,
+                     CapacityFreezer =88,
+                     Height =195.00,
+                     Width=60.00,
+                     Color="Inox",
+                     Price=749m
+                },
+                new Fridge
+                {
+                     Id ="988e82bc-f781-419d-89fa-9af95eb213d2",
+                     ProductName = "SAMSUNG",
+                     Model ="RB31FDRNDSA/EF",
+                     TotalCapacity=308,
+                     CapacityRefrigerator=210,
+                     CapacityFreezer =98,
+                     Height =185.00,
+                     Width=60.00,
+                     Color="Inox",
+                     Price=949m
+                },
+                new Fridge
+                {
+                     Id ="15902133-9037-4541-862c-ec501deafbb5",
+                     ProductName = "GORENJE",
+                     Model ="NRS9182VX",
+                     TotalCapacity=535,
+                     CapacityRefrigerator=368,
+                     CapacityFreezer=167,
+                     Height =179.30,
+                     Width=68.70,
+                     Color="Inox",
+                     Price=1999m
+                },
+               new Fridge
+               {
+                    Id ="29faa7a1-b5aa-4bc1-b78e-0c6099009ea1",
+                    ProductName = "SAMSUNG ",
+                    Model ="RS68N8220B1/EF",
+                    TotalCapacity=617,
+                    CapacityRefrigerator=407,
+                    CapacityFreezer=210,
+                    Height =178.00,
+                    Width=77.20,
+                    Color="Black",
+                    Price=2599m
+               },
+            };
+        }
+
         private static TV[] TV()
         {
             return new TV[]

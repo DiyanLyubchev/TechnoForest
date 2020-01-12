@@ -15,6 +15,8 @@ namespace TechnoForest.Models.ShoppingCarts
             this.TVs = cart.TVs;
             this.WashingMachineId = cart.WashingMachineId;
             this.WashingMachines = cart.WashingMachines;
+            this.FridgeId = cart.FridgeId;
+            this.Fridge = cart.Fridge;
             this.TotalPrice = cart.TotalPrice;
         }
         public int Id { get; set; }
@@ -32,6 +34,10 @@ namespace TechnoForest.Models.ShoppingCarts
         public string MobilePhonesId { get; set; }
 
         public MobilePhone MobilePhones { get; set; }
+
+        public string FridgeId { get; set; }
+
+        public Fridge Fridge { get; set; }
 
         public decimal? TotalPrice { get; set; }
     }

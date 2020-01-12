@@ -1,21 +1,21 @@
-﻿// buy product
+﻿/// buy product
 
-//$('.buyButton').on('click', function () {
-//    const mobilePhone = $('.buyButton').val();
+$('#buyItem').click( function () {
+    const id = $('#buyItem').val();
 
-//    $.ajax({
-//        url: '/Product/BuyMobilePhone',
-//        data: { idPhone: mobilePhone },
-//        type: 'POST',
-//        dataType: 'json',
-//        traditional: true,
-//        cache: false,
-//        success: function (result) {
-//            console.log(result.emailId);
-//            window.location.href = "/home/index/" + result.emailId;
-//        }
-//    });
-//});
+    $.ajax({
+        url: '/ShoppingCart/BuyItem',
+        data: { idItem: id },
+        type: 'POST',
+        dataType: 'json',
+        traditional: true,
+        cache: false,
+        success: function (result) {
+            console.log(result.resultId);
+            window.location.href = "/home/index/" + result.resultId;
+        }
+    });
+});
 
 //$('#send-button').on('click', function () {
 
