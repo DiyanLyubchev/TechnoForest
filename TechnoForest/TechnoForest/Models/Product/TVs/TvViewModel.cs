@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechnoForest_Data.Entity;
 
 namespace TechnoForest.Models.Product.TVs
@@ -21,7 +18,7 @@ namespace TechnoForest.Models.Product.TVs
             this.Price = tV.Price;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string ProductName { get; set; }
 

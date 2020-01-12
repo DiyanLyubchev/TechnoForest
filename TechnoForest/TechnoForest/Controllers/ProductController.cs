@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TechnoForest.Models.Product;
@@ -32,7 +33,7 @@ namespace TechnoForest.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> AddPhoneToCart(int id)
+        public async Task<IActionResult> AddPhoneToCart(string id)
         {
             var dto = new MobilePhoneDto
             {
@@ -57,7 +58,7 @@ namespace TechnoForest.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> AddWashingMachineToCart(int id)
+        public async Task<IActionResult> AddWashingMachineToCart(string id)
         {
             var dto = new WashingMachineDto
             {
@@ -82,7 +83,7 @@ namespace TechnoForest.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> AddTvToCart(int id)
+        public async Task<IActionResult> AddTvToCart(string id)
         {
             var dto = new TvDto
             {

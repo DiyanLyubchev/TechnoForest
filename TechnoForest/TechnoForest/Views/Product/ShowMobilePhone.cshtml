@@ -5,13 +5,6 @@
 }
 @using System.Security.Claims;
 <p>Result: @Model.Phone.Count()</p>
-
-<head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
 <body>
     <strong>
         <a asp-controller="Home" asp-action="Index" style="color:#0094ff">Go back</a>
@@ -42,14 +35,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @*<td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>*@
-                        <td>
-                            <p>
-                                <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id" class="btn btn-info btn-lg">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-                                </a>
-                            </p>
-                        </td>
+                        <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
                     }
                 </tr>
             }

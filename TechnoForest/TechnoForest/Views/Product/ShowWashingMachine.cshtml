@@ -34,15 +34,14 @@
 
             @if (User.Identity.IsAuthenticated)
             {
-                @*<td> <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>*@
-
-                <td>
+                <td> <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
+                @*<td>
                     <p>
                         <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id" class="btn btn-info btn-lg">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                         </a>
                     </p>
-                </td>
+                </td>*@
             }
         </tr>
         }

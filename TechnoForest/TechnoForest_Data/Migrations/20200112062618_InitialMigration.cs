@@ -157,8 +157,8 @@ namespace TechnoForest_Data.Migrations
                 name: "MobilePhones",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     Memory = table.Column<string>(nullable: true),
@@ -166,7 +166,6 @@ namespace TechnoForest_Data.Migrations
                     Color = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
-                    IsBought = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -184,13 +183,12 @@ namespace TechnoForest_Data.Migrations
                 name: "TVs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     Size = table.Column<double>(nullable: true),
                     Price = table.Column<decimal>(nullable: true),
-                    IsBought = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -208,14 +206,13 @@ namespace TechnoForest_Data.Migrations
                 name: "WashingMachines",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     WashingCapacity = table.Column<int>(nullable: true),
                     Price = table.Column<decimal>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
-                    IsBought = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -236,9 +233,9 @@ namespace TechnoForest_Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
-                    TVsId = table.Column<int>(nullable: true),
-                    WashingMachineId = table.Column<int>(nullable: true),
-                    MobilePhoneId = table.Column<int>(nullable: true),
+                    TVsId = table.Column<string>(nullable: true),
+                    WashingMachineId = table.Column<string>(nullable: true),
+                    MobilePhoneId = table.Column<string>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: true),
                     AddTOCart = table.Column<DateTime>(nullable: true)
                 },
@@ -276,11 +273,11 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "Color", "IsBought", "Memory", "Model", "Picture", "Price", "ProductName", "SizeOfDisplay", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
-                    { 2, "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null },
-                    { 3, "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
-                    { 4, "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
-                    { 5, "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null }
+                    { "17e9c26c-030f-4ee9-8d45-992d78971e1f", "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
+                    { "665d2175-1792-4078-b5ad-a4b7939eeb72", "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { "1668c2b3-cbf6-4c8e-8f36-cbf600e78610", "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { "00a206e5-c65b-4626-890a-2d39f9687f28", "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
+                    { "964460f8-fade-4c5d-96ba-9831b7c7185f", "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null }
                 });
 
             migrationBuilder.InsertData(
@@ -288,11 +285,11 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "IsBought", "Model", "Price", "ProductName", "Size", "UserId" },
                 values: new object[,]
                 {
-                    { 1, false, "KD55XG8196BAEP", 1389m, "Sony", 55.0, null },
-                    { 2, false, "BRAVIA", 2899m, "Sony", 55.0, null },
-                    { 3, false, "43LK5100PLA", 428m, "LG", 43.0, null },
-                    { 4, false, "70UI9362E", 1449.99m, "Sharp", 70.0, null },
-                    { 5, false, "32PFS4132/12", 388m, "PHILIPS", 32.0, null }
+                    { "3db78497-8adb-4400-8fdc-7d10e0350160", false, "KD55XG8196BAEP", 1389m, "Sony", 55.0, null },
+                    { "e99a4a02-b8ab-4d66-b509-4618e66f0b38", false, "BRAVIA", 2899m, "Sony", 55.0, null },
+                    { "f27ff3d6-7dda-49eb-9348-c54c3a11cf8b", false, "43LK5100PLA", 428m, "LG", 43.0, null },
+                    { "bdaf9613-95b3-4daa-affe-39fab1e1975a", false, "70UI9362E", 1449.99m, "Sharp", 70.0, null },
+                    { "6b798382-fab7-4dd8-8824-516ff63c2baf", false, "32PFS4132/12", 388m, "PHILIPS", 32.0, null }
                 });
 
             migrationBuilder.InsertData(
@@ -300,11 +297,11 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "IsBought", "Model", "Picture", "Price", "ProductName", "UserId", "WashingCapacity" },
                 values: new object[,]
                 {
-                    { 1, false, "WW70K44305W", null, 609m, "Samsung", null, 7 },
-                    { 2, false, "WMY81483LMB1", null, 669.99m, "Beko", null, 8 },
-                    { 3, false, "L9WBA61B", null, 2899.99m, "AEG", null, 9 },
-                    { 4, false, "TDLR 70210", null, 599m, "Whirlpool", null, 8 },
-                    { 5, false, "F2J6HM0W", null, 799m, "LG", null, 7 }
+                    { "c2a7b1b5-d960-4e0b-87eb-bc65ff48d9e6", false, "WW70K44305W", null, 609m, "Samsung", null, 7 },
+                    { "7443cad9-1255-4e16-94d6-b8f54b03ba78", false, "WMY81483LMB1", null, 669.99m, "Beko", null, 8 },
+                    { "ba0e316a-5bce-46dc-abb0-bd0473833558", false, "L9WBA61B", null, 2899.99m, "AEG", null, 9 },
+                    { "c51ade36-a168-4dbf-813f-61fbcdc36b9a", false, "TDLR 70210", null, 599m, "Whirlpool", null, 8 },
+                    { "26c4f63d-7cf5-431c-935d-e209cd94865f", false, "F2J6HM0W", null, 799m, "LG", null, 7 }
                 });
 
             migrationBuilder.CreateIndex(

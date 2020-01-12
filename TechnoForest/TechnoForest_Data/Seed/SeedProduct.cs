@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using TechnoForest_Data.Entity;
 
 namespace TechnoForest_Data.Seed
@@ -30,7 +31,7 @@ namespace TechnoForest_Data.Seed
             {
                 new TV
                 {
-                   Id=1,
+                   Id="3db78497-8adb-4400-8fdc-7d10e0350160",
                    ProductName= "Sony",
                    Model= "KD55XG8196BAEP",
                    Size= 55,
@@ -38,7 +39,7 @@ namespace TechnoForest_Data.Seed
                 },
                 new TV
                 {
-                   Id=2,
+                   Id="e99a4a02-b8ab-4d66-b509-4618e66f0b38",
                    ProductName= "Sony",
                    Model= "BRAVIA",
                    Size= 55,
@@ -46,7 +47,7 @@ namespace TechnoForest_Data.Seed
                 },
                 new TV
                 {
-                   Id=3,
+                   Id="f27ff3d6-7dda-49eb-9348-c54c3a11cf8b",
                    ProductName ="LG",
                    Model= "43LK5100PLA",
                    Size= 43,
@@ -54,7 +55,7 @@ namespace TechnoForest_Data.Seed
                 },
                 new TV
                 {
-                   Id=4,
+                   Id="bdaf9613-95b3-4daa-affe-39fab1e1975a",
                    ProductName ="Sharp",
                    Model= "70UI9362E",
                    Size= 70,
@@ -62,7 +63,7 @@ namespace TechnoForest_Data.Seed
                 },
                 new TV
                 {
-                   Id=5,
+                   Id="6b798382-fab7-4dd8-8824-516ff63c2baf",
                    ProductName ="PHILIPS",
                    Model= "32PFS4132/12",
                    Size= 32,
@@ -77,7 +78,7 @@ namespace TechnoForest_Data.Seed
                 {
                     new WashingMachine
                     {
-                        Id=1,
+                        Id="c2a7b1b5-d960-4e0b-87eb-bc65ff48d9e6",
                         ProductName = "Samsung",
                         Model = "WW70K44305W",
                         WashingCapacity=7,
@@ -85,7 +86,7 @@ namespace TechnoForest_Data.Seed
                     },
                     new WashingMachine
                     {
-                        Id=2,
+                        Id="7443cad9-1255-4e16-94d6-b8f54b03ba78",
                         ProductName = "Beko",
                         Model = "WMY81483LMB1",
                         WashingCapacity=8,
@@ -93,7 +94,7 @@ namespace TechnoForest_Data.Seed
                     },
                     new WashingMachine
                     {
-                        Id=3,
+                         Id="ba0e316a-5bce-46dc-abb0-bd0473833558",
                         ProductName = "AEG",
                         Model = "L9WBA61B",
                         WashingCapacity=9,
@@ -101,7 +102,7 @@ namespace TechnoForest_Data.Seed
                     },
                     new WashingMachine
                     {
-                        Id=4,
+                        Id="c51ade36-a168-4dbf-813f-61fbcdc36b9a",
                         ProductName = "Whirlpool",
                         Model = "TDLR 70210",
                         WashingCapacity=8,
@@ -109,7 +110,7 @@ namespace TechnoForest_Data.Seed
                     },
                     new WashingMachine
                     {
-                        Id=5,
+                        Id="26c4f63d-7cf5-431c-935d-e209cd94865f",
                         ProductName = "LG",
                         Model = "F2J6HM0W",
                         WashingCapacity=7,
@@ -123,7 +124,7 @@ namespace TechnoForest_Data.Seed
                 {
                      new MobilePhone
                      {
-                         Id = 1,
+                         Id="17e9c26c-030f-4ee9-8d45-992d78971e1f",
                          ProductName = "Iphone",
                          Model = "7 Plus",
                          Color = "Black",
@@ -134,7 +135,7 @@ namespace TechnoForest_Data.Seed
                      },
                      new MobilePhone
                      {
-                        Id = 2,
+                        Id="665d2175-1792-4078-b5ad-a4b7939eeb72",
                         ProductName = "Iphone",
                         Model = "7 Plus",
                         Color = "Pink",
@@ -146,7 +147,7 @@ namespace TechnoForest_Data.Seed
                      },
                      new MobilePhone
                      {
-                        Id = 3,
+                        Id="1668c2b3-cbf6-4c8e-8f36-cbf600e78610",
                         ProductName = "Iphone",
                         Model = " 6S",
                         Color = "Gray",
@@ -157,7 +158,7 @@ namespace TechnoForest_Data.Seed
                      },
                      new MobilePhone
                      {
-                        Id = 4,
+                        Id="00a206e5-c65b-4626-890a-2d39f9687f28",
                         ProductName = "Iphone",
                         Model = "X",
                         Color = "Gray",
@@ -168,7 +169,7 @@ namespace TechnoForest_Data.Seed
                      },
                       new MobilePhone
                      {
-                        Id = 5,
+                        Id="964460f8-fade-4c5d-96ba-9831b7c7185f",
                         ProductName = "Iphone",
                         Model = "X",
                         Color = "Pink",

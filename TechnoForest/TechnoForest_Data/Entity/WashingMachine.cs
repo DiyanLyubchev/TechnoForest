@@ -17,8 +17,6 @@ namespace TechnoForest_Data.Entity
 
         public string Picture { get; set; }
 
-        public bool IsBought { get; set; }
-
-        public virtual ShoppingCart ShoppingCart { get; set; }
+         public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }

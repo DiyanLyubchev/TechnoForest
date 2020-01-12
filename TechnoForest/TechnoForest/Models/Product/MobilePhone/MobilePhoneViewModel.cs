@@ -1,4 +1,5 @@
-﻿using TechnoForest_Data.Entity;
+﻿using System;
+using TechnoForest_Data.Entity;
 
 namespace TechnoForest.Models.Product
 {
@@ -20,7 +21,7 @@ namespace TechnoForest.Models.Product
         {
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string ProductName { get; set; }
 
         public string Memory { get; set; }
