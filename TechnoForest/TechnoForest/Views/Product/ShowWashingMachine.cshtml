@@ -9,7 +9,7 @@
 <p>Result: @Model.WashingMashine.Count()</p>
 
 <strong>
-    <a class="goback" style="color: #0094ff" href="javascript:history.go(-1)" title="Go to previous page">Go back</a>
+    <a asp-controller="Home" asp-action="Index" style="color: #0094ff" >Go back</a>
 </strong>
 
 <table class="table table-hover">
@@ -24,19 +24,26 @@
     <tbody>
         @foreach (var washingMachine in Model.WashingMashine)
         {
-            <tr>
-                <td>
-                    <img class="Phone" src="~/Images/washingMachine_HomePage.png" />
-                </td>
-                <td>@washingMachine.ProductName - @washingMachine.Model</td>
-                <td>@washingMachine.WashingCapacity Kg</td>
-                <td>@washingMachine.Price</td>
+        <tr>
+            <td>
+                <img class="Phone" src="~/Images/washingMachine_HomePage.png" />
+            </td>
+            <td>@washingMachine.ProductName - @washingMachine.Model</td>
+            <td>@washingMachine.WashingCapacity Kg</td>
+            <td>@washingMachine.Price</td>
 
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <td> <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
-                }
-            </tr>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td> <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
+                @*<td>
+                    <p>
+                        <a asp-controller="Product" asp-action="AddWashingMachineToCart" asp-route-id="@washingMachine.Id" class="btn btn-info btn-lg">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                        </a>
+                    </p>
+                </td>*@
+            }
+        </tr>
         }
     </tbody>
 </table>

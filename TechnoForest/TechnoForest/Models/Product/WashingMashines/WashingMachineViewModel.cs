@@ -1,4 +1,5 @@
-﻿using TechnoForest_Data.Entity;
+﻿using System;
+using TechnoForest_Data.Entity;
 
 namespace TechnoForest.Models.Product.WashingMashines
 {
@@ -18,7 +19,7 @@ namespace TechnoForest.Models.Product.WashingMashines
             this.Picture = machine.Picture;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string ProductName { get; set; }
 
         public string Model { get; set; }

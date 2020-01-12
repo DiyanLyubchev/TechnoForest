@@ -17,12 +17,14 @@ namespace TechnoForest_Service.Core
         {
             this.context = context;
         }
-        public async Task AddTvToCartAsync(TvDto dto)
+
+        public async Task<bool> AddTvToCartAsync(TvDto dto)
         {
-            if (dto.TvId == 0)
+            if (dto.TvId == null)
             {
                 throw new ProductExeption("Tv does not exist!");
             }
+
 
             var tv = await this.context.TVs
                  .FirstOrDefaultAsync(tvId => tvId.Id == dto.TvId);
@@ -52,6 +54,7 @@ namespace TechnoForest_Service.Core
 
             var cart = new ShoppingCart
             {
+                TVsId = dto.TvId,
                 TVs = tv,
                 User = currentUser,
                 UserId = dto.UserId,
@@ -61,11 +64,13 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task AddMobilePhoneToCartAsync(MobilePhoneDto dto)
+        public async Task<bool> AddMobilePhoneToCartAsync(MobilePhoneDto dto)
         {
-            if (dto.PhoneId == 0)
+            if (dto.PhoneId == null)
             {
                 throw new ProductExeption("Phone does not exist!");
             }
@@ -107,11 +112,13 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task AddWashingMachineToCartAsync(WashingMachineDto dto)
+        public async Task<bool> AddWashingMachineToCartAsync(WashingMachineDto dto)
         {
-            if (dto.WashingMichineId == 0)
+            if (dto.WashingMichineId == null)
             {
                 throw new ProductExeption("Washing machine does not exist!");
             }
@@ -153,6 +160,8 @@ namespace TechnoForest_Service.Core
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

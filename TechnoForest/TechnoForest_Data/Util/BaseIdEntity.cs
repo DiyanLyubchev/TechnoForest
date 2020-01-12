@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TechnoForest_Data.Util
 {
     public class BaseIdEntity
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; } 
+
+        public bool IsBought { get; set; }
     }
 }

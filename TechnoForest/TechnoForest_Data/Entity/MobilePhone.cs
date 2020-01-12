@@ -20,10 +20,7 @@ namespace TechnoForest_Data.Entity
         public decimal? Price { get; set; }
 
         public string Picture { get; set; }
-
-
-        public bool IsBought { get; set; }
-
+        
         public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }

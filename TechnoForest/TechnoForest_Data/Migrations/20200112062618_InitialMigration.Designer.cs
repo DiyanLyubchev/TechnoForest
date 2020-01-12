@@ -10,7 +10,7 @@ using TechnoForest_Data.Context;
 namespace TechnoForest_Data.Migrations
 {
     [DbContext(typeof(TechnoForestContext))]
-    [Migration("20200110130817_InitialMigration")]
+    [Migration("20200112062618_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,10 +154,8 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.MobilePhone", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -195,7 +193,7 @@ namespace TechnoForest_Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "17e9c26c-030f-4ee9-8d45-992d78971e1f",
                             Color = "Black",
                             IsBought = false,
                             Memory = "32 GB",
@@ -207,7 +205,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "665d2175-1792-4078-b5ad-a4b7939eeb72",
                             Color = "Pink",
                             IsBought = false,
                             Memory = "32 GB",
@@ -219,7 +217,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = "1668c2b3-cbf6-4c8e-8f36-cbf600e78610",
                             Color = "Gray",
                             IsBought = false,
                             Memory = "64 GB",
@@ -231,7 +229,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = "00a206e5-c65b-4626-890a-2d39f9687f28",
                             Color = "Gray",
                             IsBought = false,
                             Memory = "64 GB",
@@ -243,7 +241,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = "964460f8-fade-4c5d-96ba-9831b7c7185f",
                             Color = "Pink",
                             IsBought = false,
                             Memory = "64 GB",
@@ -265,11 +263,11 @@ namespace TechnoForest_Data.Migrations
                     b.Property<DateTime?>("AddTOCart")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MobilePhoneId")
-                        .HasColumnType("int");
+                    b.Property<string>("MobilePhoneId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("TVsId")
-                        .HasColumnType("int");
+                    b.Property<string>("TVsId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
@@ -277,8 +275,8 @@ namespace TechnoForest_Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("WashingMachineId")
-                        .HasColumnType("int");
+                    b.Property<string>("WashingMachineId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -301,10 +299,8 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.TV", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsBought")
                         .HasColumnType("bit");
@@ -333,7 +329,7 @@ namespace TechnoForest_Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "3db78497-8adb-4400-8fdc-7d10e0350160",
                             IsBought = false,
                             Model = "KD55XG8196BAEP",
                             Price = 1389m,
@@ -342,7 +338,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "e99a4a02-b8ab-4d66-b509-4618e66f0b38",
                             IsBought = false,
                             Model = "BRAVIA",
                             Price = 2899m,
@@ -351,7 +347,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = "f27ff3d6-7dda-49eb-9348-c54c3a11cf8b",
                             IsBought = false,
                             Model = "43LK5100PLA",
                             Price = 428m,
@@ -360,7 +356,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = "bdaf9613-95b3-4daa-affe-39fab1e1975a",
                             IsBought = false,
                             Model = "70UI9362E",
                             Price = 1449.99m,
@@ -369,7 +365,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = "6b798382-fab7-4dd8-8824-516ff63c2baf",
                             IsBought = false,
                             Model = "32PFS4132/12",
                             Price = 388m,
@@ -448,10 +444,8 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.WashingMachine", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsBought")
                         .HasColumnType("bit");
@@ -483,7 +477,7 @@ namespace TechnoForest_Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "c2a7b1b5-d960-4e0b-87eb-bc65ff48d9e6",
                             IsBought = false,
                             Model = "WW70K44305W",
                             Price = 609m,
@@ -492,7 +486,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "7443cad9-1255-4e16-94d6-b8f54b03ba78",
                             IsBought = false,
                             Model = "WMY81483LMB1",
                             Price = 669.99m,
@@ -501,7 +495,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = "ba0e316a-5bce-46dc-abb0-bd0473833558",
                             IsBought = false,
                             Model = "L9WBA61B",
                             Price = 2899.99m,
@@ -510,7 +504,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = "c51ade36-a168-4dbf-813f-61fbcdc36b9a",
                             IsBought = false,
                             Model = "TDLR 70210",
                             Price = 599m,
@@ -519,7 +513,7 @@ namespace TechnoForest_Data.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = "26c4f63d-7cf5-431c-935d-e209cd94865f",
                             IsBought = false,
                             Model = "F2J6HM0W",
                             Price = 799m,

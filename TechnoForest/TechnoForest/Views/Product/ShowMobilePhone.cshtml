@@ -5,41 +5,42 @@
 }
 @using System.Security.Claims;
 <p>Result: @Model.Phone.Count()</p>
-
-<strong>
-    <a class="goback" style="color:#0094ff" href="javascript:history.go(-1)" title="Go to previous page">Go back</a>
-</strong>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Phone Model</th>
-            <th scope="col">Display size</th>
-            <th scope="col">Memory</th>
-            <th scope="col">Color</th>
-            <th scope="col">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var phone in Model.Phone)
-        {
+<body>
+    <strong>
+        <a asp-controller="Home" asp-action="Index" style="color:#0094ff">Go back</a>
+    </strong>
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    <img class="Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
-                </td>
-                <td>@phone.ProductName - @phone.Model</td>
-                <td>@phone.SizeOfDisplay</td>
-                <td>@phone.Memory</td>
-                <td>@phone.Color</td>
-                <td>@phone.Price</td>
-
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
-                }
+                <th scope="col"></th>
+                <th scope="col">Phone Model</th>
+                <th scope="col">Display size</th>
+                <th scope="col">Memory</th>
+                <th scope="col">Color</th>
+                <th scope="col">Price</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var phone in Model.Phone)
+            {
+                <tr>
+                    <td>
+                        <img class="Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
+                    </td>
+                    <td>@phone.ProductName - @phone.Model</td>
+                    <td>@phone.SizeOfDisplay</td>
+                    <td>@phone.Memory</td>
+                    <td>@phone.Color</td>
+                    <td>@phone.Price</td>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
 
 

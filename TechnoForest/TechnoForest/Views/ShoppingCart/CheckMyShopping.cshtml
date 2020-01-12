@@ -11,7 +11,12 @@
     var sum = Model.Result
         .Select(pr => pr.TotalPrice);
 
-    decimal? resultOfTotalPrice = sum.Last();
+    decimal? resultOfTotalPrice = 0m;
+
+    if (sum.Any())
+    {
+        resultOfTotalPrice = sum.Last();
+    }
 
     <h5>
         Sum of result is: <span style="color:green">@resultOfTotalPrice</span> BGN
@@ -22,6 +27,8 @@
         <tr>
             <th scope="col">Phone Model</th>
             <th scope="col">Price</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -33,8 +40,13 @@
                 <tr>
                     <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
                     <td>Price for product is: @item.MobilePhones.Price</td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                    </td>
                 </tr>
-
             }
 
             @if (item.TVs != null && item.TVs.IsBought == false)
@@ -42,6 +54,12 @@
                 <tr>
                     <td>@item.TVs.ProductName - @item.TVs.Model</td>
                     <td>Price for product is: @item.TVs.Price</td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                    </td>
                 </tr>
             }
 
@@ -50,6 +68,12 @@
                 <tr>
                     <td>@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
                     <td>Price for product is: @item.WashingMachines.Price</td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                    </td>
                 </tr>
             }
 
