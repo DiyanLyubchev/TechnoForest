@@ -34,5 +34,15 @@ namespace TechnoForest.Controllers
 
             return View("CheckMyShopping", results);
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> BuyItem(string idItem)
+        {
+
+            var id = idItem;
+
+            return View();
+        }
     }
 }

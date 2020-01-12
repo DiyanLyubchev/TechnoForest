@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TechnoForest_Data.Context;
 using TechnoForest_Data.Entity;
@@ -31,6 +28,11 @@ namespace TechnoForest_Service.Core
         public async Task<IEnumerable<WashingMachine>> GetAllWashingMachineAsync()
         {
             return await this.context.WashingMachines.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Fridge>> GetAllFridgeAsync()
+        {
+            return await this.context.Fridges.ToListAsync();
         }
     }
 }

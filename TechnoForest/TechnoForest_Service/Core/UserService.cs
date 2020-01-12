@@ -23,6 +23,7 @@ namespace TechnoForest_Service.Core
                  .Include(mobile => mobile.MobilePhones)
                  .Include(tv => tv.TVs)
                  .Include(wash  => wash.WashingMachines)
+                 .Include(fridge => fridge.Fridge)
                  .Where(userId => userId.UserId == dto.UserId)
                  .ToListAsync();
 

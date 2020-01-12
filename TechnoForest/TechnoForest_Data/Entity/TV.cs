@@ -14,7 +14,11 @@ namespace TechnoForest_Data.Entity
         public double? Size { get; set; }
 
         public decimal? Price { get; set; }
-        
+
+        public User User { get; set; }
+
+        public string UserId { get; set; }
+
         public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }

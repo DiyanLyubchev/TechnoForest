@@ -7,7 +7,11 @@ namespace TechnoForest_Service.Core
     public interface IProductService
     {
         Task<IEnumerable<MobilePhone>> GetAllMobilePhoneAsync();
+
         Task<IEnumerable<TV>> GetAllTVAsync();
+
         Task<IEnumerable<WashingMachine>> GetAllWashingMachineAsync();
+
+        Task<IEnumerable<Fridge>> GetAllFridgeAsync();
     }
 }

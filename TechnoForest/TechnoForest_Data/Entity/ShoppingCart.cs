@@ -24,10 +24,17 @@ namespace TechnoForest_Data.Entity
 
         public virtual WashingMachine WashingMachines { get; set; }
 
+
         [ForeignKey("MobilePhone")]
         public string MobilePhoneId  { get; set; } 
 
         public virtual MobilePhone MobilePhones { get; set; }
+
+
+        [ForeignKey("Fridge")]
+        public string FridgeId { get; set; }
+
+        public virtual Fridge Fridge { get; set; }
 
         public decimal? TotalPrice { get; set; }
 

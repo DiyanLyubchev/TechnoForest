@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>
-    You have @Model.Result.Count() results!
+    You have @Model.Result.Count() items in your shopping cart!
 </h1>
 @{
     var sum = Model.Result
@@ -19,13 +19,13 @@
     }
 
     <h5>
-        Sum of result is: <span style="color:green">@resultOfTotalPrice</span> BGN
+        Sum of total price is: <span style="color:green">@resultOfTotalPrice</span> BGN
     </h5>
 }
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">Phone Model</th>
+            <th scope="col">Item Model</th>
             <th scope="col">Price</th>
             <th></th>
             <th></th>
@@ -41,10 +41,10 @@
                     <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
                     <td>Price for product is: @item.MobilePhones.Price</td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.MobilePhones.Id" class="btn btn-primary">Buy Item</button>
                     </td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.MobilePhones.Id" class="btn btn-primary">Reject Item</button>
                     </td>
                 </tr>
             }
@@ -55,10 +55,10 @@
                     <td>@item.TVs.ProductName - @item.TVs.Model</td>
                     <td>Price for product is: @item.TVs.Price</td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.TVs.Id" class="btn btn-primary">Buy Item</button>
                     </td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.TVs.Id" class="btn btn-primary">Reject Item</button>
                     </td>
                 </tr>
             }
@@ -69,14 +69,28 @@
                     <td>@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
                     <td>Price for product is: @item.WashingMachines.Price</td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Buy Item</button>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.WashingMachines.Id"  class="btn btn-primary">Buy Item</button>
                     </td>
                     <td>
-                        <button style="background-color:#34495e" class="btn btn-primary">Reject Item</button>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.WashingMachines.Id" class="btn btn-primary">Reject Item</button>
                     </td>
                 </tr>
             }
 
+
+            @if (item.Fridge != null && item.Fridge.IsBought == false)
+            {
+                <tr>
+                    <td>@item.Fridge.ProductName - @item.Fridge.Model</td>
+                    <td>Price for product is: @item.Fridge.Price</td>
+                    <td>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.Fridge.Id" class="btn btn-primary">Buy Item</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.Fridge.Id" class="btn btn-primary">Reject Item</button>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

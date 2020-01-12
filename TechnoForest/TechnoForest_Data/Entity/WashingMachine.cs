@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TechnoForest_Data.Util;
+﻿using TechnoForest_Data.Util;
 
 namespace TechnoForest_Data.Entity
 {
@@ -17,6 +14,10 @@ namespace TechnoForest_Data.Entity
 
         public string Picture { get; set; }
 
-         public virtual ShoppingCart ShoppingCart { get; set; }
+        public User User { get; set; }
+
+        public string UserId { get; set; }
+
+        public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }

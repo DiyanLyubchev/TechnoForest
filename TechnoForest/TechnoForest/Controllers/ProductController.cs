@@ -4,6 +4,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TechnoForest.Models.Product;
+using TechnoForest.Models.Product.Fridges;
 using TechnoForest.Models.Product.TVs;
 using TechnoForest.Models.Product.WashingMashines;
 using TechnoForest_Service.Core;
@@ -94,6 +95,31 @@ namespace TechnoForest.Controllers
             await this.shopping.AddTvToCartAsync(dto);
 
             return RedirectToAction("ShowTv", "Product");
+        }
+
+        public async Task<IActionResult> ShowFridge()
+        {
+            var allFridges = await this.service.GetAllFridgeAsync();
+
+            var listFridges = new ListFridgeViewModel(allFridges);
+
+            return View(listFridges);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AddFridgeToCart(string id)
+        {
+            var dto = new FridgeDto
+            {
+                FridgeId = id,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            await this.shopping.AddFridgeToCartAsync(dto);
+
+            return RedirectToAction("ShowFridge", "Product");
         }
 
     }

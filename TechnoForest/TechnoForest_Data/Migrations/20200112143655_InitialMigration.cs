@@ -154,6 +154,34 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Fridges",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    TotalCapacity = table.Column<int>(nullable: false),
+                    CapacityRefrigerator = table.Column<int>(nullable: false),
+                    CapacityFreezer = table.Column<int>(nullable: false),
+                    Height = table.Column<double>(nullable: false),
+                    Width = table.Column<double>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fridges", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fridges_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MobilePhones",
                 columns: table => new
                 {
@@ -236,12 +264,19 @@ namespace TechnoForest_Data.Migrations
                     TVsId = table.Column<string>(nullable: true),
                     WashingMachineId = table.Column<string>(nullable: true),
                     MobilePhoneId = table.Column<string>(nullable: true),
+                    FridgeId = table.Column<string>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: true),
                     AddTOCart = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_Fridges_FridgeId",
+                        column: x => x.FridgeId,
+                        principalTable: "Fridges",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ShoppingCarts_MobilePhones_MobilePhoneId",
                         column: x => x.MobilePhoneId,
@@ -269,15 +304,27 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Fridges",
+                columns: new[] { "Id", "CapacityFreezer", "CapacityRefrigerator", "Color", "Height", "IsBought", "Model", "Price", "ProductName", "TotalCapacity", "UserId", "Width" },
+                values: new object[,]
+                {
+                    { "42a046da-3717-4c47-88b8-defacf39499e", 42, 171, "White", 144.0, false, "VFD 263", 355m, "VESTFROST", 213, null, 54.0 },
+                    { "56780700-4a74-4ce0-bc55-893f5d8cd4ca", 88, 229, "Inox", 195.0, false, "RF 36SM-Z/P1CB27", 749m, "SNAIGE", 317, null, 60.0 },
+                    { "988e82bc-f781-419d-89fa-9af95eb213d2", 98, 210, "Inox", 185.0, false, "RB31FDRNDSA/EF", 949m, "SAMSUNG", 308, null, 60.0 },
+                    { "15902133-9037-4541-862c-ec501deafbb5", 167, 368, "Inox", 179.30000000000001, false, "NRS9182VX", 1999m, "GORENJE", 535, null, 68.700000000000003 },
+                    { "29faa7a1-b5aa-4bc1-b78e-0c6099009ea1", 210, 407, "Black", 178.0, false, "RS68N8220B1/EF", 2599m, "SAMSUNG ", 617, null, 77.200000000000003 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "MobilePhones",
                 columns: new[] { "Id", "Color", "IsBought", "Memory", "Model", "Picture", "Price", "ProductName", "SizeOfDisplay", "UserId" },
                 values: new object[,]
                 {
-                    { "17e9c26c-030f-4ee9-8d45-992d78971e1f", "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
-                    { "665d2175-1792-4078-b5ad-a4b7939eeb72", "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null },
-                    { "1668c2b3-cbf6-4c8e-8f36-cbf600e78610", "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
                     { "00a206e5-c65b-4626-890a-2d39f9687f28", "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
-                    { "964460f8-fade-4c5d-96ba-9831b7c7185f", "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null }
+                    { "1668c2b3-cbf6-4c8e-8f36-cbf600e78610", "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { "964460f8-fade-4c5d-96ba-9831b7c7185f", "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null },
+                    { "17e9c26c-030f-4ee9-8d45-992d78971e1f", "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
+                    { "665d2175-1792-4078-b5ad-a4b7939eeb72", "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null }
                 });
 
             migrationBuilder.InsertData(
@@ -297,10 +344,10 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "IsBought", "Model", "Picture", "Price", "ProductName", "UserId", "WashingCapacity" },
                 values: new object[,]
                 {
+                    { "c51ade36-a168-4dbf-813f-61fbcdc36b9a", false, "TDLR 70210", null, 599m, "Whirlpool", null, 8 },
                     { "c2a7b1b5-d960-4e0b-87eb-bc65ff48d9e6", false, "WW70K44305W", null, 609m, "Samsung", null, 7 },
                     { "7443cad9-1255-4e16-94d6-b8f54b03ba78", false, "WMY81483LMB1", null, 669.99m, "Beko", null, 8 },
                     { "ba0e316a-5bce-46dc-abb0-bd0473833558", false, "L9WBA61B", null, 2899.99m, "AEG", null, 9 },
-                    { "c51ade36-a168-4dbf-813f-61fbcdc36b9a", false, "TDLR 70210", null, 599m, "Whirlpool", null, 8 },
                     { "26c4f63d-7cf5-431c-935d-e209cd94865f", false, "F2J6HM0W", null, 799m, "LG", null, 7 }
                 });
 
@@ -344,9 +391,21 @@ namespace TechnoForest_Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fridges_UserId",
+                table: "Fridges",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MobilePhones_UserId",
                 table: "MobilePhones",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_FridgeId",
+                table: "ShoppingCarts",
+                column: "FridgeId",
+                unique: true,
+                filter: "[FridgeId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_MobilePhoneId",
@@ -407,6 +466,9 @@ namespace TechnoForest_Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Fridges");
 
             migrationBuilder.DropTable(
                 name: "MobilePhones");

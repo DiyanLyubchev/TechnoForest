@@ -150,6 +150,123 @@ namespace TechnoForest_Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TechnoForest_Data.Entity.Fridge", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CapacityFreezer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CapacityRefrigerator")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsBought")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Fridges");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "42a046da-3717-4c47-88b8-defacf39499e",
+                            CapacityFreezer = 42,
+                            CapacityRefrigerator = 171,
+                            Color = "White",
+                            Height = 144.0,
+                            IsBought = false,
+                            Model = "VFD 263",
+                            Price = 355m,
+                            ProductName = "VESTFROST",
+                            TotalCapacity = 213,
+                            Width = 54.0
+                        },
+                        new
+                        {
+                            Id = "56780700-4a74-4ce0-bc55-893f5d8cd4ca",
+                            CapacityFreezer = 88,
+                            CapacityRefrigerator = 229,
+                            Color = "Inox",
+                            Height = 195.0,
+                            IsBought = false,
+                            Model = "RF 36SM-Z/P1CB27",
+                            Price = 749m,
+                            ProductName = "SNAIGE",
+                            TotalCapacity = 317,
+                            Width = 60.0
+                        },
+                        new
+                        {
+                            Id = "988e82bc-f781-419d-89fa-9af95eb213d2",
+                            CapacityFreezer = 98,
+                            CapacityRefrigerator = 210,
+                            Color = "Inox",
+                            Height = 185.0,
+                            IsBought = false,
+                            Model = "RB31FDRNDSA/EF",
+                            Price = 949m,
+                            ProductName = "SAMSUNG",
+                            TotalCapacity = 308,
+                            Width = 60.0
+                        },
+                        new
+                        {
+                            Id = "15902133-9037-4541-862c-ec501deafbb5",
+                            CapacityFreezer = 167,
+                            CapacityRefrigerator = 368,
+                            Color = "Inox",
+                            Height = 179.30000000000001,
+                            IsBought = false,
+                            Model = "NRS9182VX",
+                            Price = 1999m,
+                            ProductName = "GORENJE",
+                            TotalCapacity = 535,
+                            Width = 68.700000000000003
+                        },
+                        new
+                        {
+                            Id = "29faa7a1-b5aa-4bc1-b78e-0c6099009ea1",
+                            CapacityFreezer = 210,
+                            CapacityRefrigerator = 407,
+                            Color = "Black",
+                            Height = 178.0,
+                            IsBought = false,
+                            Model = "RS68N8220B1/EF",
+                            Price = 2599m,
+                            ProductName = "SAMSUNG ",
+                            TotalCapacity = 617,
+                            Width = 77.200000000000003
+                        });
+                });
+
             modelBuilder.Entity("TechnoForest_Data.Entity.MobilePhone", b =>
                 {
                     b.Property<string>("Id")
@@ -261,6 +378,9 @@ namespace TechnoForest_Data.Migrations
                     b.Property<DateTime?>("AddTOCart")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FridgeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("MobilePhoneId")
                         .HasColumnType("nvarchar(450)");
 
@@ -277,6 +397,10 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FridgeId")
+                        .IsUnique()
+                        .HasFilter("[FridgeId] IS NOT NULL");
 
                     b.HasIndex("MobilePhoneId")
                         .IsUnique()
@@ -571,15 +695,26 @@ namespace TechnoForest_Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TechnoForest_Data.Entity.Fridge", b =>
+                {
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("TechnoForest_Data.Entity.MobilePhone", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.User", null)
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
                         .WithMany("MobilePhones")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TechnoForest_Data.Entity.ShoppingCart", b =>
                 {
+                    b.HasOne("TechnoForest_Data.Entity.Fridge", "Fridge")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "FridgeId");
+
                     b.HasOne("TechnoForest_Data.Entity.MobilePhone", "MobilePhones")
                         .WithOne("ShoppingCart")
                         .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "MobilePhoneId");
@@ -599,14 +734,14 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.TV", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.User", null)
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
                         .WithMany("TVs")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TechnoForest_Data.Entity.WashingMachine", b =>
                 {
-                    b.HasOne("TechnoForest_Data.Entity.User", null)
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
                         .WithMany("WashingMachines")
                         .HasForeignKey("UserId");
                 });

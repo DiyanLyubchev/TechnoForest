@@ -9,5 +9,6 @@ namespace TechnoForest_Data.Util
         public string Id { get; set; } 
 
         public bool IsBought { get; set; }
+
     }
 }
