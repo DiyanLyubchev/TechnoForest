@@ -37,12 +37,19 @@ namespace TechnoForest.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> BuyItem(string idItem)
+        public async Task<JsonResult> BuyItem(string idItem, string rejectItem)
         {
 
-            var id = idItem;
+            var dto = new UserDto
+            {
+                BuyItem = idItem,
+                RejectItem = rejectItem,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
 
-            return View();
+            await this.service.ProcessesProductAsync(dto);
+
+            return Json(new { resultId = rejectItem });
         }
     }
 }

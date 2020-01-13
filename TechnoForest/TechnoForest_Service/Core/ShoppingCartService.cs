@@ -84,11 +84,11 @@ namespace TechnoForest_Service.Core
             var phonePrice = await this.context.MobilePhones
                 .Where(phoneId => phoneId.Id == dto.PhoneId)
                 .Select(price => price.Price)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             var shoppingCart = await this.context.ShoppingCarts
                 .Where(userId => userId.UserId == dto.UserId)
-                .SingleOrDefaultAsync();
+                 .FirstOrDefaultAsync();
 
             var shoppingPhone = await this.context.ShoppingCarts
                 .Where(user => user.UserId == dto.UserId)
@@ -103,29 +103,18 @@ namespace TechnoForest_Service.Core
             {
                 newPricePhone = phonePrice;
             }
-      
 
-            if (shoppingCart.MobilePhoneId == dto.PhoneId)
+            var cart = new ShoppingCart
             {
-                shoppingCart.TotalPrice = newPricePhone;
-                shoppingCart.AddTOCart = DateTime.Now;
-
-                await this.context.SaveChangesAsync();
-            }
-            else
-            {
-                var cart = new ShoppingCart
-                {
-                    MobilePhoneId = dto.PhoneId,
-                    MobilePhones = phone,
-                    User = currentUser,
-                    UserId = dto.UserId,
-                    AddTOCart = DateTime.Now,
-                    TotalPrice = newPricePhone
-                };
-                await this.context.ShoppingCarts.AddAsync(cart);
-                await this.context.SaveChangesAsync();
-            }
+                MobilePhoneId = dto.PhoneId,
+                MobilePhones = phone,
+                User = currentUser,
+                UserId = dto.UserId,
+                AddTOCart = DateTime.Now,
+                TotalPrice = newPricePhone
+            };
+            await this.context.ShoppingCarts.AddAsync(cart);
+            await this.context.SaveChangesAsync();
 
             return true;
         }
@@ -146,7 +135,7 @@ namespace TechnoForest_Service.Core
             var washingMachinePrice = await this.context.WashingMachines
                 .Where(wMachineId => wMachineId.Id == dto.WashingMichineId)
                 .Select(price => price.Price)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
 
             var shoppingWashingMachine = await this.context.ShoppingCarts
@@ -195,7 +184,7 @@ namespace TechnoForest_Service.Core
             var fridgePrice = await this.context.Fridges
                 .Where(fridgeId => fridgeId.Id == dto.FridgeId)
                 .Select(price => price.Price)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             var shoppingfridge = await this.context.ShoppingCarts
                 .Where(user => user.UserId == dto.UserId)
@@ -213,7 +202,7 @@ namespace TechnoForest_Service.Core
 
             var cart = new ShoppingCart
             {
-                FridgeId= dto.FridgeId,
+                FridgeId = dto.FridgeId,
                 Fridge = fridge,
                 User = currentUser,
                 UserId = dto.UserId,
