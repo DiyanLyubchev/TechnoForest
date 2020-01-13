@@ -4,9 +4,6 @@
     ViewData["Title"] = "CheckMyShopping";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>
-    You have @Model.Result.Count() items in your shopping cart!
-</h1>
 @{
     var sum = Model.Result
         .Select(pr => pr.TotalPrice);
@@ -17,7 +14,6 @@
     {
         resultOfTotalPrice = sum.Last();
     }
-
     <h5>
         Sum of total price is: <span style="color:green">@resultOfTotalPrice</span> BGN
     </h5>
@@ -35,7 +31,7 @@
         @foreach (var item in Model.Result)
         {
 
-            @if (item.MobilePhones != null && item.MobilePhones.IsBought == false)
+            @if (item.MobilePhones != null && item.MobilePhones.IsBought == true)
             {
                 <tr>
                     <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
@@ -49,7 +45,7 @@
                 </tr>
             }
 
-            @if (item.TVs != null && item.TVs.IsBought == false)
+            @if (item.TVs != null && item.TVs.IsBought == true)
             {
                 <tr>
                     <td>@item.TVs.ProductName - @item.TVs.Model</td>
@@ -63,13 +59,13 @@
                 </tr>
             }
 
-            @if (item.WashingMachines != null && item.WashingMachines.IsBought == false)
+            @if (item.WashingMachines != null && item.WashingMachines.IsBought == true)
             {
                 <tr>
                     <td>@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
                     <td>Price for product is: @item.WashingMachines.Price</td>
                     <td>
-                        <button style="background-color:#34495e" id="buyItem" value="@item.WashingMachines.Id @item.WashingMachines.Price"  class="btn btn-primary">Buy Item</button>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.WashingMachines.Id @item.WashingMachines.Price" class="btn btn-primary">Buy Item</button>
                     </td>
                     <td>
                         <button style="background-color:#34495e" id="rejectItem" value="@item.WashingMachines.Id @item.WashingMachines.Price" class="btn btn-primary">Reject Item</button>
@@ -78,16 +74,16 @@
             }
 
 
-            @if (item.Fridge != null && item.Fridge.IsBought == false)
+            @if (item.Fridge != null && item.Fridge.IsBought == true)
             {
                 <tr>
                     <td>@item.Fridge.ProductName - @item.Fridge.Model</td>
                     <td>Price for product is: @item.Fridge.Price</td>
                     <td>
-                        <button style="background-color:#34495e" id="buyItem" value="@item.Fridge.Id @item.Fridge" class="btn btn-primary">Buy Item</button>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.Fridge.Id @item.Fridge.Price" class="btn btn-primary">Buy Item</button>
                     </td>
                     <td>
-                        <button style="background-color:#34495e" id="rejectItem" value="@item.Fridge.Id @item.Fridge" class="btn btn-primary">Reject Item</button>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.Fridge.Id @item.Fridge.Price" class="btn btn-primary">Reject Item</button>
                     </td>
                 </tr>
             }

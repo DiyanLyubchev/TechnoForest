@@ -62,6 +62,8 @@ namespace TechnoForest_Service.Core
                 TotalPrice = newPriceTv
             };
 
+            tv.IsBought = true;
+
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
 
@@ -113,6 +115,9 @@ namespace TechnoForest_Service.Core
                 AddTOCart = DateTime.Now,
                 TotalPrice = newPricePhone
             };
+
+            phone.IsBought = true;
+
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
 
@@ -161,6 +166,7 @@ namespace TechnoForest_Service.Core
                 AddTOCart = DateTime.Now,
                 TotalPrice = newPriceWashingMachine
             };
+            washingMachine.IsBought = true;
 
             await this.context.ShoppingCarts.AddAsync(cart);
             await this.context.SaveChangesAsync();
@@ -190,27 +196,50 @@ namespace TechnoForest_Service.Core
                 .Where(user => user.UserId == dto.UserId)
                 .Select(price => price.TotalPrice).ToListAsync();
 
+            var shopping = await this.context.ShoppingCarts
+                .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+
             decimal? newPriceFridge = null;
             if (shoppingfridge.Count() != 0)
             {
                 newPriceFridge = shoppingfridge.Last() + fridgePrice;
+                if (shopping.FridgeId.Contains(dto.FridgeId))
+                {
+                    shopping.TotalPrice = newPriceFridge;
+                    shopping.AddTOCart = DateTime.Now;
+                    fridge.IsBought = true;
+                }
+                else
+                {
+                    var cart = new ShoppingCart
+                    {
+                        FridgeId = dto.FridgeId,
+                        Fridge = fridge,
+                        User = currentUser,
+                        UserId = dto.UserId,
+                        AddTOCart = DateTime.Now,
+                        TotalPrice = newPriceFridge,
+                    };
+                    fridge.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                }
             }
             else
             {
                 newPriceFridge = fridgePrice;
+                var cart = new ShoppingCart
+                {
+                    FridgeId = dto.FridgeId,
+                    Fridge = fridge,
+                    User = currentUser,
+                    UserId = dto.UserId,
+                    AddTOCart = DateTime.Now,
+                    TotalPrice = newPriceFridge,
+                };
+                fridge.IsBought = true;
+                await this.context.ShoppingCarts.AddAsync(cart);
             }
-
-            var cart = new ShoppingCart
-            {
-                FridgeId = dto.FridgeId,
-                Fridge = fridge,
-                User = currentUser,
-                UserId = dto.UserId,
-                AddTOCart = DateTime.Now,
-                TotalPrice = newPriceFridge
-            };
-
-            await this.context.ShoppingCarts.AddAsync(cart);
+            
             await this.context.SaveChangesAsync();
 
             return true;

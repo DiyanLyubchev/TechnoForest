@@ -35,7 +35,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary" id="AddCartButton">Аdded to cart</button></a></td>
+                        <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary">Аdded to cart</button></a></td>
                     }
                 </tr>
             }
