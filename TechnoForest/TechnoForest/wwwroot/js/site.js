@@ -1,6 +1,6 @@
-﻿/// buy product
+﻿/// Buy product
 
-$('#buyItem').click( function () {
+$('#buyItem').click(function () {
     const id = $('#buyItem').val();
 
     $.ajax({
@@ -11,11 +11,30 @@ $('#buyItem').click( function () {
         traditional: true,
         cache: false,
         success: function (result) {
-            console.log(result.resultId);
             window.location.href = "/home/index/" + result.resultId;
         }
     });
 });
+
+// Reject product
+
+$('#rejectItem').click(function () {
+    const id = $('#rejectItem').val();
+
+    $.ajax({
+        url: '/ShoppingCart/BuyItem',
+        data: { rejectItem: id },
+        type: 'POST',
+        dataType: 'json',
+        traditional: true,
+        cache: false,
+        success: function (result) {
+            window.location.href = "/home/index/" + result.resultId;
+        }
+    });
+});
+
+
 
 //$('#send-button').on('click', function () {
 

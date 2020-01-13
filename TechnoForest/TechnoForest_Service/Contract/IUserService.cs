@@ -8,5 +8,7 @@ namespace TechnoForest_Service.Core
     public interface IUserService
     {
         Task<IEnumerable<ShoppingCart>> CurrentUserShoppingAsync(UserDto dto);
+
+        Task<bool> ProcessesProductAsync(UserDto dto);
     }
 }
