@@ -162,6 +162,7 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Height")
@@ -171,12 +172,14 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalCapacity")
@@ -273,27 +276,32 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Color")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBought")
                         .HasColumnType("bit");
 
                     b.Property<string>("Memory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Picture")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("SizeOfDisplay")
+                    b.Property<double>("SizeOfDisplay")
                         .HasColumnType("float");
 
                     b.Property<string>("UserId")
@@ -428,15 +436,17 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Size")
+                    b.Property<double>("Size")
                         .HasColumnType("float");
 
                     b.Property<string>("UserId")
@@ -573,21 +583,23 @@ namespace TechnoForest_Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Picture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("WashingCapacity")
+                    b.Property<int>("WashingCapacity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
