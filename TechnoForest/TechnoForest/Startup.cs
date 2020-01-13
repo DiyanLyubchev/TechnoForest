@@ -57,7 +57,7 @@ namespace TechnoForest
             services.AddTransient<IProductService, ProductService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<ISearchService, SearchService>();
 
 
             services.ConfigureApplicationCookie(options =>

@@ -42,30 +42,65 @@ namespace TechnoForest_Service.Core
                 .Where(user => user.UserId == dto.UserId)
                 .Select(price => price.TotalPrice).ToListAsync();
 
+            var shopping = await this.context.ShoppingCarts
+                   .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+
             decimal? newPriceTv = null;
             if (shoppingTv.Count() != 0)
             {
                 newPriceTv = shoppingTv.Last() + tvPrice;
+
+                if (shopping.TVsId == null)
+                {
+                    var cart = new ShoppingCart
+                    {
+                        TVsId = dto.TvId,
+                        TVs = tv,
+                        User = currentUser,
+                        UserId = dto.UserId,
+                        AddTOCart = DateTime.Now,
+                        TotalPrice = newPriceTv,
+                    };
+
+                    tv.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+                else if (shopping.TVsId.Contains(dto.TvId))
+                {
+                    shopping.TotalPrice = newPriceTv;
+                    shopping.AddTOCart = DateTime.Now;
+                    tv.IsBought = true;
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
             }
             else
             {
                 newPriceTv = tvPrice;
+
+                var cart = new ShoppingCart
+                {
+                    TVsId = dto.TvId,
+                    TVs = tv,
+                    User = currentUser,
+                    UserId = dto.UserId,
+                    AddTOCart = DateTime.Now,
+                    TotalPrice = newPriceTv
+                };
+
+                tv.IsBought = true;
+
+                await this.context.ShoppingCarts.AddAsync(cart);
+                await this.context.SaveChangesAsync();
+                return true;
             }
 
-            var cart = new ShoppingCart
-            {
-                TVsId = dto.TvId,
-                TVs = tv,
-                User = currentUser,
-                UserId = dto.UserId,
-                AddTOCart = DateTime.Now,
-                TotalPrice = newPriceTv
-            };
+            return false;
 
-            await this.context.ShoppingCarts.AddAsync(cart);
-            await this.context.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<bool> AddMobilePhoneToCartAsync(MobilePhoneDto dto)
@@ -94,29 +129,63 @@ namespace TechnoForest_Service.Core
                 .Where(user => user.UserId == dto.UserId)
                 .Select(price => price.TotalPrice).ToListAsync();
 
+
+            var shopping = await this.context.ShoppingCarts
+               .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+
             decimal? newPricePhone = null;
             if (shoppingPhone.Count() != 0)
             {
                 newPricePhone = shoppingPhone.Last() + phonePrice;
+
+                if (shopping.MobilePhoneId == null)
+                {
+                    var cart = new ShoppingCart
+                    {
+                        MobilePhoneId = dto.PhoneId,
+                        MobilePhones = phone,
+                        User = currentUser,
+                        UserId = dto.UserId,
+                        AddTOCart = DateTime.Now,
+                        TotalPrice = newPricePhone,
+                    };
+
+                    phone.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+                else if (shopping.MobilePhoneId.Contains(dto.PhoneId))
+                {
+                    shopping.TotalPrice = newPricePhone;
+                    shopping.AddTOCart = DateTime.Now;
+                    phone.IsBought = true;
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
             }
             else
             {
                 newPricePhone = phonePrice;
+                var cart = new ShoppingCart
+                {
+                    MobilePhoneId = dto.PhoneId,
+                    MobilePhones = phone,
+                    User = currentUser,
+                    UserId = dto.UserId,
+                    AddTOCart = DateTime.Now,
+                    TotalPrice = newPricePhone
+                };
+
+                phone.IsBought = true;
+                await this.context.ShoppingCarts.AddAsync(cart);
+
+                await this.context.SaveChangesAsync();
+                return true;
             }
-
-            var cart = new ShoppingCart
-            {
-                MobilePhoneId = dto.PhoneId,
-                MobilePhones = phone,
-                User = currentUser,
-                UserId = dto.UserId,
-                AddTOCart = DateTime.Now,
-                TotalPrice = newPricePhone
-            };
-            await this.context.ShoppingCarts.AddAsync(cart);
-            await this.context.SaveChangesAsync();
-
-            return true;
+            return false;
         }
 
         public async Task<bool> AddWashingMachineToCartAsync(WashingMachineDto dto)
@@ -142,30 +211,65 @@ namespace TechnoForest_Service.Core
                 .Where(user => user.UserId == dto.UserId)
                 .Select(price => price.TotalPrice).ToListAsync();
 
+            var shopping = await this.context.ShoppingCarts
+               .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+
             decimal? newPriceWashingMachine = null;
+
             if (shoppingWashingMachine.Count() != 0)
             {
                 newPriceWashingMachine = shoppingWashingMachine.Last() + washingMachinePrice;
+
+                if (shopping.WashingMachineId == null)
+                {
+                    var cart = new ShoppingCart
+                    {
+                        WashingMachineId = dto.WashingMichineId,
+                        WashingMachines = washingMachine,
+                        User = currentUser,
+                        UserId = dto.UserId,
+                        AddTOCart = DateTime.Now,
+                        TotalPrice = newPriceWashingMachine,
+                    };
+
+                    washingMachine.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+                else if (shopping.WashingMachineId.Contains(dto.WashingMichineId))
+                {
+                    shopping.TotalPrice = newPriceWashingMachine;
+                    shopping.AddTOCart = DateTime.Now;
+                    washingMachine.IsBought = true;
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
             }
             else
             {
                 newPriceWashingMachine = washingMachinePrice;
+
+                var cart = new ShoppingCart
+                {
+                    WashingMachineId = dto.WashingMichineId,
+                    WashingMachines = washingMachine,
+                    User = currentUser,
+                    UserId = dto.UserId,
+                    AddTOCart = DateTime.Now,
+                    TotalPrice = newPriceWashingMachine
+                };
+                washingMachine.IsBought = true;
+
+                await this.context.ShoppingCarts.AddAsync(cart);
+                await this.context.SaveChangesAsync();
+
+                return true;
             }
 
-            var cart = new ShoppingCart
-            {
-                WashingMachineId = dto.WashingMichineId,
-                WashingMachines = washingMachine,
-                User = currentUser,
-                UserId = dto.UserId,
-                AddTOCart = DateTime.Now,
-                TotalPrice = newPriceWashingMachine
-            };
-
-            await this.context.ShoppingCarts.AddAsync(cart);
-            await this.context.SaveChangesAsync();
-
-            return true;
+            return false;
         }
 
         public async Task<bool> AddFridgeToCartAsync(FridgeDto dto)
@@ -190,30 +294,63 @@ namespace TechnoForest_Service.Core
                 .Where(user => user.UserId == dto.UserId)
                 .Select(price => price.TotalPrice).ToListAsync();
 
+            var shopping = await this.context.ShoppingCarts
+                .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+
             decimal? newPriceFridge = null;
             if (shoppingfridge.Count() != 0)
             {
                 newPriceFridge = shoppingfridge.Last() + fridgePrice;
+
+                if (shopping.FridgeId == null)
+                {
+                    var cart = new ShoppingCart
+                    {
+                        FridgeId = dto.FridgeId,
+                        Fridge = fridge,
+                        User = currentUser,
+                        UserId = dto.UserId,
+                        AddTOCart = DateTime.Now,
+                        TotalPrice = newPriceFridge,
+                    };
+
+                    fridge.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+                else if (shopping.FridgeId.Contains(dto.FridgeId))
+                {
+                    shopping.TotalPrice = newPriceFridge;
+                    shopping.AddTOCart = DateTime.Now;
+                    fridge.IsBought = true;
+
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
             }
             else
             {
                 newPriceFridge = fridgePrice;
+                var cart = new ShoppingCart
+                {
+                    FridgeId = dto.FridgeId,
+                    Fridge = fridge,
+                    User = currentUser,
+                    UserId = dto.UserId,
+                    AddTOCart = DateTime.Now,
+                    TotalPrice = newPriceFridge,
+                };
+                fridge.IsBought = true;
+                await this.context.ShoppingCarts.AddAsync(cart);
+                await this.context.SaveChangesAsync();
+
+                return true;
             }
 
-            var cart = new ShoppingCart
-            {
-                FridgeId = dto.FridgeId,
-                Fridge = fridge,
-                User = currentUser,
-                UserId = dto.UserId,
-                AddTOCart = DateTime.Now,
-                TotalPrice = newPriceFridge
-            };
-
-            await this.context.ShoppingCarts.AddAsync(cart);
-            await this.context.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }

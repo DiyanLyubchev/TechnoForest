@@ -159,14 +159,14 @@ namespace TechnoForest_Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     IsBought = table.Column<bool>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
+                    ProductName = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
                     TotalCapacity = table.Column<int>(nullable: false),
                     CapacityRefrigerator = table.Column<int>(nullable: false),
                     CapacityFreezer = table.Column<int>(nullable: false),
                     Height = table.Column<double>(nullable: false),
                     Width = table.Column<double>(nullable: false),
-                    Color = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -187,13 +187,13 @@ namespace TechnoForest_Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     IsBought = table.Column<bool>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    Memory = table.Column<string>(nullable: true),
-                    SizeOfDisplay = table.Column<double>(nullable: true),
-                    Color = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: true),
-                    Picture = table.Column<string>(nullable: true),
+                    ProductName = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
+                    Memory = table.Column<string>(nullable: false),
+                    SizeOfDisplay = table.Column<double>(nullable: false),
+                    Color = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Picture = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -213,10 +213,10 @@ namespace TechnoForest_Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     IsBought = table.Column<bool>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    Size = table.Column<double>(nullable: true),
-                    Price = table.Column<decimal>(nullable: true),
+                    ProductName = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
+                    Size = table.Column<double>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -236,10 +236,10 @@ namespace TechnoForest_Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     IsBought = table.Column<bool>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    WashingCapacity = table.Column<int>(nullable: true),
-                    Price = table.Column<decimal>(nullable: true),
+                    ProductName = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
+                    WashingCapacity = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
                     Picture = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },

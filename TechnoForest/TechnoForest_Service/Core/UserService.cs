@@ -11,10 +11,11 @@ namespace TechnoForest_Service.Core
     public class UserService : IUserService
     {
         private readonly TechnoForestContext context;
-
-        public UserService(TechnoForestContext context)
+        private readonly ISearchService service;
+        public UserService(TechnoForestContext context, ISearchService service)
         {
             this.context = context;
+            this.service = service;
         }
 
         public async Task<IEnumerable<ShoppingCart>> CurrentUserShoppingAsync(UserDto dto)
@@ -39,13 +40,6 @@ namespace TechnoForest_Service.Core
                 var itemId = itemResult[0];
                 decimal? itemPrice = decimal.Parse(itemResult[1]);
 
-                var item = await this.context.ShoppingCarts
-                    .Where(product => product.WashingMachineId == itemId
-                    || product.TVsId == itemId || product.MobilePhoneId ==
-                    itemId || product.FridgeId == itemId
-                    && product.UserId == dto.UserId)
-                    .FirstOrDefaultAsync();
-
                 var tottalPrice =
                   await this.context.ShoppingCarts.Where(userId => userId.UserId == dto.UserId)
                     .Select(price => price.TotalPrice).ToListAsync();
@@ -55,13 +49,19 @@ namespace TechnoForest_Service.Core
                  .Where(userId => userId.UserId == dto.UserId)
                  .FirstOrDefaultAsync();
 
-                var result = tottalPrice.Last();
-                result -= itemPrice;
+                var item = await this.context.ShoppingCarts.Where(id => id.FridgeId == itemId ||
+                id.TVsId == itemId || id.WashingMachineId == itemId || id.MobilePhoneId == itemId)
+                    .SingleOrDefaultAsync();
 
-                cart.TotalPrice = result;
+                var result = tottalPrice.Last();
+                var actualResult = result - itemPrice;
+                cart.TotalPrice = actualResult;
 
                 await this.context.SaveChangesAsync();
 
+                this.context.ShoppingCarts.Remove(item);
+                await this.context.SaveChangesAsync();
+                return true;
             }
             else if (dto.BuyItem != null)
             {
@@ -70,11 +70,10 @@ namespace TechnoForest_Service.Core
                 var itemId = itemResult[0];
                 decimal? itemPrice = decimal.Parse(itemResult[1]);
 
-                var item = await this.context.ShoppingCarts
-                    .Where(product => product.WashingMachineId == itemId
-                    || product.TVsId == itemId || product.MobilePhoneId == itemId || product.FridgeId == itemId
-                    && product.UserId == dto.UserId)
-                    .FirstOrDefaultAsync();
+                var phone = await this.service.SearchMobileById(itemId);
+                var tv = await this.service.SearchTvById(itemId);
+                var washingMachine = await service.SearchWashingMachineById(itemId);
+                var fridge = await this.service.SearchFridgeById(itemId);
 
                 var tottalPrice =
                  await this.context.ShoppingCarts.Where(userId => userId.UserId == dto.UserId)
@@ -90,10 +89,30 @@ namespace TechnoForest_Service.Core
 
                 cart.TotalPrice = result;
 
-                await this.context.SaveChangesAsync();
+                if (phone != null)
+                {
+                    phone.IsBought = false;
+                }
+                else if (tv != null)
+                {
+                    tv.IsBought = false;
+                }
+                else if (washingMachine != null)
+                {
+                    washingMachine.IsBought = false;
+                }
+                else if (fridge != null)
+                {
+                    fridge.IsBought = false;
+                }
+
+                //   await this.context.SaveChangesAsync();
+
+                return true;
             }
 
-            return true;
+            return false;
         }
+
     }
 }
