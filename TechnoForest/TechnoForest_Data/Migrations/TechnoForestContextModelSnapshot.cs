@@ -150,6 +150,77 @@ namespace TechnoForest_Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TechnoForest_Data.Entity.AirConditioner", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsBought")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NoiseLevel")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PowerCooling")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PowerHeating")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AirConditioners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c015da0f-33f9-46d3-85cf-5314e0c76b95",
+                            IsBought = false,
+                            Model = "TAC-09CHSD",
+                            NoiseLevel = 30,
+                            PowerCooling = 2.6000000000000001,
+                            PowerHeating = 2.6099999999999999,
+                            Price = 639m,
+                            ProductName = "SANG"
+                        },
+                        new
+                        {
+                            Id = "de59b84d-aeb2-4fa8-9370-89617cc82744",
+                            IsBought = false,
+                            Model = "AS09TA2HRA",
+                            NoiseLevel = 40,
+                            PowerCooling = 2.6000000000000001,
+                            PowerHeating = 2.7999999999999998,
+                            Price = 759m,
+                            ProductName = "HAIER "
+                        },
+                        new
+                        {
+                            Id = "e23eba28-66af-4239-9c66-798a7c956fa0",
+                            IsBought = false,
+                            Model = "BEVPI 121",
+                            NoiseLevel = 43,
+                            PowerCooling = 3.5,
+                            PowerHeating = 2.6000000000000001,
+                            Price = 879m,
+                            ProductName = "BEKO  "
+                        });
+                });
+
             modelBuilder.Entity("TechnoForest_Data.Entity.Fridge", b =>
                 {
                     b.Property<string>("Id")
@@ -386,6 +457,9 @@ namespace TechnoForest_Data.Migrations
                     b.Property<DateTime?>("AddTOCart")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("AirConditionerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("FridgeId")
                         .HasColumnType("nvarchar(450)");
 
@@ -401,10 +475,17 @@ namespace TechnoForest_Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("VacuumCleanerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("WashingMachineId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AirConditionerId")
+                        .IsUnique()
+                        .HasFilter("[AirConditionerId] IS NOT NULL");
 
                     b.HasIndex("FridgeId")
                         .IsUnique()
@@ -419,6 +500,10 @@ namespace TechnoForest_Data.Migrations
                         .HasFilter("[TVsId] IS NOT NULL");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("VacuumCleanerId")
+                        .IsUnique()
+                        .HasFilter("[VacuumCleanerId] IS NOT NULL");
 
                     b.HasIndex("WashingMachineId")
                         .IsUnique()
@@ -574,6 +659,99 @@ namespace TechnoForest_Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TechnoForest_Data.Entity.VacuumCleaner", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsBought")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NoiseLevel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("VacuumCleaners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9c21bee7-20fd-46c3-8a23-867fe58e4c2e",
+                            Color = "Blue",
+                            IsBought = false,
+                            Model = "VCEA01GACBUCY",
+                            NoiseLevel = 85,
+                            Power = 800,
+                            Price = 139m,
+                            ProductName = "GORENJE"
+                        },
+                        new
+                        {
+                            Id = "1cee3c19-e11b-41a3-bbfb-88951a84c50c",
+                            Color = "Black",
+                            IsBought = false,
+                            Model = "VCC45T0S3R",
+                            NoiseLevel = 80,
+                            Power = 850,
+                            Price = 149m,
+                            ProductName = "SAMSUNG"
+                        },
+                        new
+                        {
+                            Id = "803ff24c-4815-485c-8162-29bd1a72c7ec",
+                            Color = "Black",
+                            IsBought = false,
+                            Model = "BGS05A220",
+                            NoiseLevel = 78,
+                            Power = 700,
+                            Price = 169m,
+                            ProductName = "BOSCH "
+                        },
+                        new
+                        {
+                            Id = "5824fa78-1bdb-4196-b4cc-f003dfb291a1",
+                            Color = "Black",
+                            IsBought = false,
+                            Model = "FC9333",
+                            NoiseLevel = 76,
+                            Power = 650,
+                            Price = 219m,
+                            ProductName = "PHILIPS  "
+                        },
+                        new
+                        {
+                            Id = "fccee9db-3fe1-4300-bef7-78cf9a8b68df",
+                            Color = "Black-blue",
+                            IsBought = false,
+                            Model = "RO3731EACOMPACT",
+                            NoiseLevel = 79,
+                            Power = 750,
+                            Price = 189m,
+                            ProductName = "ROWENTA  "
+                        });
+                });
+
             modelBuilder.Entity("TechnoForest_Data.Entity.WashingMachine", b =>
                 {
                     b.Property<string>("Id")
@@ -707,6 +885,13 @@ namespace TechnoForest_Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TechnoForest_Data.Entity.AirConditioner", b =>
+                {
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("TechnoForest_Data.Entity.Fridge", b =>
                 {
                     b.HasOne("TechnoForest_Data.Entity.User", "User")
@@ -723,6 +908,10 @@ namespace TechnoForest_Data.Migrations
 
             modelBuilder.Entity("TechnoForest_Data.Entity.ShoppingCart", b =>
                 {
+                    b.HasOne("TechnoForest_Data.Entity.AirConditioner", "AirConditioner")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "AirConditionerId");
+
                     b.HasOne("TechnoForest_Data.Entity.Fridge", "Fridge")
                         .WithOne("ShoppingCart")
                         .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "FridgeId");
@@ -739,6 +928,10 @@ namespace TechnoForest_Data.Migrations
                         .WithMany("ShoppingCarts")
                         .HasForeignKey("UserId");
 
+                    b.HasOne("TechnoForest_Data.Entity.VacuumCleaner", "VacuumCleaner")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "VacuumCleanerId");
+
                     b.HasOne("TechnoForest_Data.Entity.WashingMachine", "WashingMachines")
                         .WithOne("ShoppingCart")
                         .HasForeignKey("TechnoForest_Data.Entity.ShoppingCart", "WashingMachineId");
@@ -748,6 +941,13 @@ namespace TechnoForest_Data.Migrations
                 {
                     b.HasOne("TechnoForest_Data.Entity.User", "User")
                         .WithMany("TVs")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("TechnoForest_Data.Entity.VacuumCleaner", b =>
+                {
+                    b.HasOne("TechnoForest_Data.Entity.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 

@@ -34,5 +34,15 @@ namespace TechnoForest_Service.Core
         {
             return await this.context.Fridges.ToListAsync();
         }
+
+        public async Task<IEnumerable<AirConditioner>> GetAllAirConditionerAsync()
+        {
+            return await this.context.AirConditioners.ToListAsync();
+        }
+
+        public async Task<IEnumerable<VacuumCleaner>> GetAllVacuumCleanerAsync()
+        {
+            return await this.context.VacuumCleaners.ToListAsync();
+        }
     }
 }

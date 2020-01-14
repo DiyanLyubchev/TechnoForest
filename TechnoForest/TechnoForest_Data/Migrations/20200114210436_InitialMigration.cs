@@ -69,6 +69,31 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AirConditioners",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    PowerCooling = table.Column<double>(nullable: false),
+                    PowerHeating = table.Column<double>(nullable: false),
+                    NoiseLevel = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AirConditioners", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AirConditioners_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -231,6 +256,31 @@ namespace TechnoForest_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VacuumCleaners",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsBought = table.Column<bool>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    Power = table.Column<int>(nullable: false),
+                    NoiseLevel = table.Column<int>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VacuumCleaners", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VacuumCleaners_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WashingMachines",
                 columns: table => new
                 {
@@ -265,12 +315,20 @@ namespace TechnoForest_Data.Migrations
                     WashingMachineId = table.Column<string>(nullable: true),
                     MobilePhoneId = table.Column<string>(nullable: true),
                     FridgeId = table.Column<string>(nullable: true),
+                    AirConditionerId = table.Column<string>(nullable: true),
+                    VacuumCleanerId = table.Column<string>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: true),
                     AddTOCart = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AirConditioners_AirConditionerId",
+                        column: x => x.AirConditionerId,
+                        principalTable: "AirConditioners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ShoppingCarts_Fridges_FridgeId",
                         column: x => x.FridgeId,
@@ -296,11 +354,27 @@ namespace TechnoForest_Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_ShoppingCarts_VacuumCleaners_VacuumCleanerId",
+                        column: x => x.VacuumCleanerId,
+                        principalTable: "VacuumCleaners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_ShoppingCarts_WashingMachines_WashingMachineId",
                         column: x => x.WashingMachineId,
                         principalTable: "WashingMachines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AirConditioners",
+                columns: new[] { "Id", "IsBought", "Model", "NoiseLevel", "PowerCooling", "PowerHeating", "Price", "ProductName", "UserId" },
+                values: new object[,]
+                {
+                    { "c015da0f-33f9-46d3-85cf-5314e0c76b95", false, "TAC-09CHSD", 30, 2.6000000000000001, 2.6099999999999999, 639m, "SANG", null },
+                    { "de59b84d-aeb2-4fa8-9370-89617cc82744", false, "AS09TA2HRA", 40, 2.6000000000000001, 2.7999999999999998, 759m, "HAIER ", null },
+                    { "e23eba28-66af-4239-9c66-798a7c956fa0", false, "BEVPI 121", 43, 3.5, 2.6000000000000001, 879m, "BEKO  ", null }
                 });
 
             migrationBuilder.InsertData(
@@ -320,11 +394,11 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "Color", "IsBought", "Memory", "Model", "Picture", "Price", "ProductName", "SizeOfDisplay", "UserId" },
                 values: new object[,]
                 {
-                    { "00a206e5-c65b-4626-890a-2d39f9687f28", "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
-                    { "1668c2b3-cbf6-4c8e-8f36-cbf600e78610", "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
-                    { "964460f8-fade-4c5d-96ba-9831b7c7185f", "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null },
                     { "17e9c26c-030f-4ee9-8d45-992d78971e1f", "Black", false, "32 GB", "7 Plus", "~/images/Black7Plus.jpg", 929.36m, "Iphone", 5.5, null },
-                    { "665d2175-1792-4078-b5ad-a4b7939eeb72", "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null }
+                    { "665d2175-1792-4078-b5ad-a4b7939eeb72", "Pink", false, "32 GB", "7 Plus", "~/images/Pink7Plus.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { "1668c2b3-cbf6-4c8e-8f36-cbf600e78610", "Gray", false, "64 GB", " 6S", "~/images/Gray6s.jpg", 1029.36m, "Iphone", 5.5, null },
+                    { "00a206e5-c65b-4626-890a-2d39f9687f28", "Gray", false, "64 GB", "X", "~/images/Xgray.jpg", 1849.99m, "Iphone", 5.7999999999999998, null },
+                    { "964460f8-fade-4c5d-96ba-9831b7c7185f", "Pink", false, "64 GB", "X", "~/images/Xgray.jpg", 2049.99m, "Iphone", 5.7999999999999998, null }
                 });
 
             migrationBuilder.InsertData(
@@ -332,11 +406,23 @@ namespace TechnoForest_Data.Migrations
                 columns: new[] { "Id", "IsBought", "Model", "Price", "ProductName", "Size", "UserId" },
                 values: new object[,]
                 {
+                    { "6b798382-fab7-4dd8-8824-516ff63c2baf", false, "32PFS4132/12", 388m, "PHILIPS", 32.0, null },
+                    { "bdaf9613-95b3-4daa-affe-39fab1e1975a", false, "70UI9362E", 1449.99m, "Sharp", 70.0, null },
                     { "3db78497-8adb-4400-8fdc-7d10e0350160", false, "KD55XG8196BAEP", 1389m, "Sony", 55.0, null },
                     { "e99a4a02-b8ab-4d66-b509-4618e66f0b38", false, "BRAVIA", 2899m, "Sony", 55.0, null },
-                    { "f27ff3d6-7dda-49eb-9348-c54c3a11cf8b", false, "43LK5100PLA", 428m, "LG", 43.0, null },
-                    { "bdaf9613-95b3-4daa-affe-39fab1e1975a", false, "70UI9362E", 1449.99m, "Sharp", 70.0, null },
-                    { "6b798382-fab7-4dd8-8824-516ff63c2baf", false, "32PFS4132/12", 388m, "PHILIPS", 32.0, null }
+                    { "f27ff3d6-7dda-49eb-9348-c54c3a11cf8b", false, "43LK5100PLA", 428m, "LG", 43.0, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "VacuumCleaners",
+                columns: new[] { "Id", "Color", "IsBought", "Model", "NoiseLevel", "Power", "Price", "ProductName", "UserId" },
+                values: new object[,]
+                {
+                    { "9c21bee7-20fd-46c3-8a23-867fe58e4c2e", "Blue", false, "VCEA01GACBUCY", 85, 800, 139m, "GORENJE", null },
+                    { "1cee3c19-e11b-41a3-bbfb-88951a84c50c", "Black", false, "VCC45T0S3R", 80, 850, 149m, "SAMSUNG", null },
+                    { "803ff24c-4815-485c-8162-29bd1a72c7ec", "Black", false, "BGS05A220", 78, 700, 169m, "BOSCH ", null },
+                    { "5824fa78-1bdb-4196-b4cc-f003dfb291a1", "Black", false, "FC9333", 76, 650, 219m, "PHILIPS  ", null },
+                    { "fccee9db-3fe1-4300-bef7-78cf9a8b68df", "Black-blue", false, "RO3731EACOMPACT", 79, 750, 189m, "ROWENTA  ", null }
                 });
 
             migrationBuilder.InsertData(
@@ -350,6 +436,11 @@ namespace TechnoForest_Data.Migrations
                     { "ba0e316a-5bce-46dc-abb0-bd0473833558", false, "L9WBA61B", null, 2899.99m, "AEG", null, 9 },
                     { "26c4f63d-7cf5-431c-935d-e209cd94865f", false, "F2J6HM0W", null, 799m, "LG", null, 7 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AirConditioners_UserId",
+                table: "AirConditioners",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -401,6 +492,13 @@ namespace TechnoForest_Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_AirConditionerId",
+                table: "ShoppingCarts",
+                column: "AirConditionerId",
+                unique: true,
+                filter: "[AirConditionerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_FridgeId",
                 table: "ShoppingCarts",
                 column: "FridgeId",
@@ -427,6 +525,13 @@ namespace TechnoForest_Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_VacuumCleanerId",
+                table: "ShoppingCarts",
+                column: "VacuumCleanerId",
+                unique: true,
+                filter: "[VacuumCleanerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_WashingMachineId",
                 table: "ShoppingCarts",
                 column: "WashingMachineId",
@@ -436,6 +541,11 @@ namespace TechnoForest_Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TVs_UserId",
                 table: "TVs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VacuumCleaners_UserId",
+                table: "VacuumCleaners",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -468,6 +578,9 @@ namespace TechnoForest_Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AirConditioners");
+
+            migrationBuilder.DropTable(
                 name: "Fridges");
 
             migrationBuilder.DropTable(
@@ -475,6 +588,9 @@ namespace TechnoForest_Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "TVs");
+
+            migrationBuilder.DropTable(
+                name: "VacuumCleaners");
 
             migrationBuilder.DropTable(
                 name: "WashingMachines");

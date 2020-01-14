@@ -9,5 +9,9 @@ namespace TechnoForest_Service.Core
         Task<MobilePhone> SearchMobileById(string id);
         Task<TV> SearchTvById(string id);
         Task<WashingMachine> SearchWashingMachineById(string id);
+
+        Task<AirConditioner> SearchAirConditionerById(string id);
+
+        Task<VacuumCleaner> SearchVacuumCleanerById(string id);
     }
 }

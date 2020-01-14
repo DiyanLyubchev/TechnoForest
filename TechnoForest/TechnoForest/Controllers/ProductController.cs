@@ -4,8 +4,10 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TechnoForest.Models.Product;
+using TechnoForest.Models.Product.AirConditioners;
 using TechnoForest.Models.Product.Fridges;
 using TechnoForest.Models.Product.TVs;
+using TechnoForest.Models.Product.VacuumCleaners;
 using TechnoForest.Models.Product.WashingMashines;
 using TechnoForest_Service.Core;
 using TechnoForest_Service.Dto;
@@ -120,6 +122,24 @@ namespace TechnoForest.Controllers
             await this.shopping.AddFridgeToCartAsync(dto);
 
             return RedirectToAction("ShowFridge", "Product");
+        }
+
+        public async Task<IActionResult> ShowVacuumCleaners()
+        {
+            var allVacuum = await this.service.GetAllVacuumCleanerAsync();
+
+            var listVacuumCleaners = new ListVacuumCleanersViewModel(allVacuum);
+
+            return View(listVacuumCleaners);
+        }
+
+        public async Task<IActionResult> ShowAirConditioner()
+        {
+            var allAirConditioner = await this.service.GetAllAirConditionerAsync();
+
+            var listAirConditioner = new ListAirConditionerViewModel(allAirConditioner);
+
+            return View(listAirConditioner);
         }
 
     }
