@@ -32,6 +32,112 @@ namespace TechnoForest_Data.Seed
 
         }
 
+        public static void SeedVacuumCleaners(this ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<VacuumCleaner>().HasData(VacuumCleaners());
+
+        }
+        public static void SeedAirConditioner(this ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<AirConditioner>().HasData(AirConditioner());
+
+        }
+
+        private static AirConditioner[] AirConditioner()
+        {
+            return new AirConditioner[]
+                {
+                     new AirConditioner
+                     {
+                          Id ="c015da0f-33f9-46d3-85cf-5314e0c76b95",
+                          ProductName ="SANG",
+                          Model = "TAC-09CHSD",
+                          PowerCooling = 2.600,
+                          PowerHeating = 2.610,
+                          NoiseLevel = 30,
+                          Price=639
+                     },
+                     new AirConditioner
+                     {
+                          Id ="de59b84d-aeb2-4fa8-9370-89617cc82744",
+                          ProductName ="HAIER ",
+                          Model = "AS09TA2HRA",
+                          PowerCooling = 2.600,
+                          PowerHeating = 2.800,
+                          NoiseLevel = 40,
+                          Price=759
+                     },
+                     new AirConditioner
+                     {
+                          Id ="e23eba28-66af-4239-9c66-798a7c956fa0",
+                          ProductName ="BEKO  ",
+                          Model = "BEVPI 121",
+                          PowerCooling = 3.500,
+                          PowerHeating = 2.600,
+                          NoiseLevel = 43,
+                          Price=879
+                     },
+                };
+        }
+
+        private static VacuumCleaner[] VacuumCleaners()
+        {
+            return new VacuumCleaner[]
+                {
+                    new VacuumCleaner
+                    {
+                         Id ="9c21bee7-20fd-46c3-8a23-867fe58e4c2e",
+                         ProductName = "GORENJE",
+                         Model ="VCEA01GACBUCY",
+                         Power = 800,
+                         NoiseLevel =85,
+                         Color = "Blue",
+                         Price=139m
+                    },
+                    new VacuumCleaner
+                    {
+                         Id ="1cee3c19-e11b-41a3-bbfb-88951a84c50c",
+                         ProductName = "SAMSUNG",
+                         Model ="VCC45T0S3R",
+                         Power = 850,
+                         NoiseLevel =80,
+                         Color = "Black",
+                         Price=149m
+                    },
+                    new VacuumCleaner
+                    {
+                         Id ="803ff24c-4815-485c-8162-29bd1a72c7ec",
+                         ProductName = "BOSCH ",
+                         Model ="BGS05A220",
+                         Power = 700,
+                         NoiseLevel =78,
+                         Color = "Black",
+                         Price=169m
+                    },
+                    new VacuumCleaner
+                    {
+                         Id ="5824fa78-1bdb-4196-b4cc-f003dfb291a1",
+                         ProductName = "PHILIPS  ",
+                         Model ="FC9333",
+                         Power = 650,
+                         NoiseLevel =76,
+                         Color = "Black",
+                         Price=219m
+                    },
+                    new VacuumCleaner
+                    {
+                         Id ="fccee9db-3fe1-4300-bef7-78cf9a8b68df",
+                         ProductName = "ROWENTA  ",
+                         Model ="RO3731EACOMPACT",
+                         Power = 750,
+                         NoiseLevel =79,
+                         Color = "Black-blue",
+                         Price=189m
+                    },
+                };
+        }
 
         private static Fridge[] Fridges()
         {

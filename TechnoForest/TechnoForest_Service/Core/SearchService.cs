@@ -39,5 +39,17 @@ namespace TechnoForest_Service.Core
                 .FirstOrDefaultAsync(fridgeId => fridgeId.Id == id);
         }
 
+        public async Task<AirConditioner> SearchAirConditionerById(string id)
+        {
+            return await this.context.AirConditioners
+                .FirstOrDefaultAsync(airConditionerId => airConditionerId.Id == id);
+        }
+
+        public async Task<VacuumCleaner> SearchVacuumCleanerById(string id)
+        {
+            return await this.context.VacuumCleaners
+                .FirstOrDefaultAsync(vacuumCleanerId => vacuumCleanerId.Id == id);
+        }
+
     }
 }

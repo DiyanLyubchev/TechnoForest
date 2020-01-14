@@ -29,6 +29,10 @@ namespace TechnoForest_Data.Context
 
         public DbSet<Fridge> Fridges { get; set; }
 
+        public DbSet<AirConditioner> AirConditioners { get; set; }
+
+        public DbSet<VacuumCleaner> VacuumCleaners { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //fridge 
@@ -55,8 +59,11 @@ namespace TechnoForest_Data.Context
             modelBuilder.SeedMobilePhone();
             modelBuilder.SeedWhashingMachine();
             modelBuilder.SeedTv();
-            modelBuilder.SeedFridge() ;
-          
+            modelBuilder.SeedFridge();
+            modelBuilder.SeedVacuumCleaners();
+            modelBuilder.SeedAirConditioner();
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

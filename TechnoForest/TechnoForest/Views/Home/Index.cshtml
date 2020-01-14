@@ -33,7 +33,7 @@
                 <strong>
                     <a asp-controller="Product" asp-action="ShowMobilePhone">
                         <p class="text-center">
-                            Mobile Phone
+                            Mobile Phones
                         </p>
                     </a>
                 </strong>
@@ -43,7 +43,7 @@
                 <strong>
                     <a asp-controller="Product" asp-action="ShowWashingMachine">
                         <p class="text-center">
-                            Washing Machine
+                            Washing Machines
                         </p>
                     </a>
                 </strong>
@@ -63,19 +63,21 @@
         <div style="height:250px; width:100%;">
 
             <div style=" height:250px; width:33%; float:left; justify-content:space-between;">
-                    <a asp-action="ShowFridge" asp-controller="Product">
-                        <img class="home-Page-Fridge" src="~/Images/Fridge-HOme-Page.jpeg" />
-                    </a>
+                <a asp-action="ShowFridge" asp-controller="Product">
+                    <img class="home-Page-Fridge" src="~/Images/Fridge-HOme-Page.jpeg" />
+                </a>
             </div>
 
-            <div style=" height:250px; width:33%; float:right; justify-content:space-between; border-color:yellow; border-style: solid;">
-
-
+            <div style=" height:250px; width:33%; float:right; justify-content:space-between;">
+                <a asp-action="ShowVacuumCleaners" asp-controller="Product">
+                    <img class="home-vage-vacuum-cleaner" src="~/Images/home-page-canister-vacuums-wfvc-43331-bl-64_1000.jpg" />
+                </a>
             </div>
 
-            <div style=" height:250px; width:34%; float:right; justify-content:space-between; border-color:saddlebrown; border-style: solid;">
-
-
+            <div style=" height:250px; width:34%; float:right; justify-content:space-between;">
+                <a asp-action="ShowAirConditioner" asp-controller="Product">
+                    <img class="home-vage-vacuum-cleaner" src="~/Images/home-page-air-conditioner.jpg" />
+                </a>
             </div>
         </div>
 
@@ -84,20 +86,31 @@
                 <strong>
                     <a asp-controller="Product" asp-action="ShowFridge">
                         <p class="text-center">
-                            Fridge
+                            Fridges
                         </p>
                     </a>
                 </strong>
             </div>
 
-            <div style="height:50px; width:33%; float:right; border-color:deeppink; border-style: solid;">
-
+            <div style="height:50px; width:33%; float:right; ">
+                <strong>
+                    <a asp-action="ShowVacuumCleaners" asp-controller="Product">
+                        <p class="text-center">
+                            Vacuum Cleaners
+                        </p>
+                    </a>
+                </strong>
 
             </div>
 
-            <div style="height:50px; width:34%; float:right; border-color: black; border-style: solid;">
-
-
+            <div style="height:50px; width:34%; float:right;">
+                <strong>
+                    <a asp-action="ShowAirConditioner" asp-controller="Product">
+                        <p class="text-center">
+                            Air Conditioner
+                        </p>
+                    </a>
+                </strong>
             </div>
         </div>
     </div>

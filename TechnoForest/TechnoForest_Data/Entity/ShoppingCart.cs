@@ -36,6 +36,18 @@ namespace TechnoForest_Data.Entity
 
         public virtual Fridge Fridge { get; set; }
 
+
+        [ForeignKey("AirConditioner")]
+        public string AirConditionerId { get; set; }
+
+        public virtual AirConditioner AirConditioner { get; set; }
+
+
+        [ForeignKey("VacuumCleaner")]
+        public string VacuumCleanerId { get; set; }
+
+        public virtual VacuumCleaner VacuumCleaner { get; set; }
+
         public decimal? TotalPrice { get; set; }
 
         public DateTime? AddTOCart { get; set; }

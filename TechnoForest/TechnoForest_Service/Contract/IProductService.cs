@@ -13,5 +13,9 @@ namespace TechnoForest_Service.Core
         Task<IEnumerable<WashingMachine>> GetAllWashingMachineAsync();
 
         Task<IEnumerable<Fridge>> GetAllFridgeAsync();
+
+        Task<IEnumerable<AirConditioner>> GetAllAirConditionerAsync();
+
+        Task<IEnumerable<VacuumCleaner>> GetAllVacuumCleanerAsync();
     }
 }
