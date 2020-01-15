@@ -18,6 +18,10 @@ namespace TechnoForest.Models.ShoppingCarts
             this.FridgeId = cart.FridgeId;
             this.Fridge = cart.Fridge;
             this.TotalPrice = cart.TotalPrice;
+            this.AirConditionerId = cart.AirConditionerId;
+            this.AirConditioner = cart.AirConditioner;
+            this.VacuumCleanerId = cart.VacuumCleanerId;
+            this.VacuumCleaner = cart.VacuumCleaner;
         }
         public int Id { get; set; }
 
@@ -38,6 +42,14 @@ namespace TechnoForest.Models.ShoppingCarts
         public string FridgeId { get; set; }
 
         public Fridge Fridge { get; set; }
+
+        public string AirConditionerId { get; set; }
+
+        public virtual AirConditioner AirConditioner { get; set; }
+
+        public string VacuumCleanerId { get; set; }
+
+        public virtual VacuumCleaner VacuumCleaner { get; set; }
 
         public decimal? TotalPrice { get; set; }
     }

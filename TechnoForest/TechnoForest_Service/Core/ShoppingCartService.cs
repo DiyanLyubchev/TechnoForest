@@ -6,61 +6,44 @@ using TechnoForest_Data.Context;
 using TechnoForest_Data.Entity;
 using TechnoForest_Service.CustomException;
 using TechnoForest_Service.Dto;
+using TechnoForest_Service.TechnoForestFactory;
 
 namespace TechnoForest_Service.Core
 {
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly TechnoForestContext context;
-
-        public ShoppingCartService(TechnoForestContext context)
+        private readonly IFactory factory;
+        private readonly IRepositoryForest repository;
+        public ShoppingCartService(TechnoForestContext context, IFactory factory , IRepositoryForest repository)
         {
+            this.repository = repository;
             this.context = context;
+            this.factory = factory;
         }
 
-        public async Task<bool> AddTvToCartAsync(TvDto dto)
+        public async Task<bool> AddTvToCartAsync(ProductDto dto)
         {
-            if (dto.TvId == null)
+            if (dto.ProductId == null)
             {
                 throw new ProductExeption("Tv does not exist!");
             }
 
-
-            var tv = await this.context.TVs
-                 .FirstOrDefaultAsync(tvId => tvId.Id == dto.TvId);
-
-            var currentUser = await this.context.Users
-                .FirstOrDefaultAsync(id => id.Id == dto.UserId);
-
-            var tvPrice = await this.context.TVs
-                .Where(tVId => tVId.Id == dto.TvId)
-                .Select(price => price.Price)
-                .SingleOrDefaultAsync();
-
-
-            var shoppingTv = await this.context.ShoppingCarts
-                .Where(user => user.UserId == dto.UserId)
-                .Select(price => price.TotalPrice).ToListAsync();
-
-            var shopping = await this.context.ShoppingCarts
-                   .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+            var tv = await this.repository.SearchTvById(dto.ProductId);
+            var currentUser = await this.repository.CurrentUserById(dto.UserId);
+            var tvPrice = await this.repository.TVCurrentPriceById(dto.ProductId);
+            var shoppingTotalPrice = await this.repository.GetTotalPriceFromShopingCartByCurrentUser(dto.UserId);
+            var shopping = await this.repository.GetShoppingCartUser(dto.UserId);
 
             decimal? newPriceTv = null;
-            if (shoppingTv.Count() != 0)
+            if (shoppingTotalPrice.Count() != 0)
             {
-                newPriceTv = shoppingTv.Last() + tvPrice;
+                newPriceTv = shoppingTotalPrice.Last() + tvPrice;
 
                 if (shopping.TVsId == null)
                 {
-                    var cart = new ShoppingCart
-                    {
-                        TVsId = dto.TvId,
-                        TVs = tv,
-                        User = currentUser,
-                        UserId = dto.UserId,
-                        AddTOCart = DateTime.Now,
-                        TotalPrice = newPriceTv,
-                    };
+                    var cart = this.factory
+                        .FillCartWithTV(dto.ProductId, tv, currentUser, dto.UserId, newPriceTv);
 
                     tv.IsBought = true;
                     await this.context.ShoppingCarts.AddAsync(cart);
@@ -68,7 +51,7 @@ namespace TechnoForest_Service.Core
 
                     return true;
                 }
-                else if (shopping.TVsId.Contains(dto.TvId))
+                else if (shopping.TVsId.Contains(dto.ProductId))
                 {
                     shopping.TotalPrice = newPriceTv;
                     shopping.AddTOCart = DateTime.Now;
@@ -82,15 +65,8 @@ namespace TechnoForest_Service.Core
             {
                 newPriceTv = tvPrice;
 
-                var cart = new ShoppingCart
-                {
-                    TVsId = dto.TvId,
-                    TVs = tv,
-                    User = currentUser,
-                    UserId = dto.UserId,
-                    AddTOCart = DateTime.Now,
-                    TotalPrice = newPriceTv
-                };
+                var cart = this.factory
+                          .FillCartWithTV(dto.ProductId, tv, currentUser, dto.UserId, newPriceTv);
 
                 tv.IsBought = true;
 
@@ -103,52 +79,28 @@ namespace TechnoForest_Service.Core
 
         }
 
-        public async Task<bool> AddMobilePhoneToCartAsync(MobilePhoneDto dto)
+        public async Task<bool> AddMobilePhoneToCartAsync(ProductDto dto)
         {
-            if (dto.PhoneId == null)
+            if (dto.ProductId == null)
             {
                 throw new ProductExeption("Phone does not exist!");
             }
 
-            var phone = await this.context.MobilePhones
-                 .FirstOrDefaultAsync(phoneId => phoneId.Id == dto.PhoneId);
-
-            var currentUser = await this.context.Users
-                .FirstOrDefaultAsync(id => id.Id == dto.UserId);
-
-            var phonePrice = await this.context.MobilePhones
-                .Where(phoneId => phoneId.Id == dto.PhoneId)
-                .Select(price => price.Price)
-                .FirstOrDefaultAsync();
-
-            var shoppingCart = await this.context.ShoppingCarts
-                .Where(userId => userId.UserId == dto.UserId)
-                 .FirstOrDefaultAsync();
-
-            var shoppingPhone = await this.context.ShoppingCarts
-                .Where(user => user.UserId == dto.UserId)
-                .Select(price => price.TotalPrice).ToListAsync();
-
-
-            var shopping = await this.context.ShoppingCarts
-               .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+            var phone = await this.repository.SearchMobileById(dto.ProductId);
+            var phonePrice = await this.repository.PhoneCurrentPriceById(dto.ProductId);
+            var currentUser = await this.repository.CurrentUserById(dto.UserId);
+            var shoppingTotalPrice = await this.repository.GetTotalPriceFromShopingCartByCurrentUser(dto.UserId);
+            var shopping = await this.repository.GetShoppingCartUser(dto.UserId);
 
             decimal? newPricePhone = null;
-            if (shoppingPhone.Count() != 0)
+            if (shoppingTotalPrice.Count() != 0)
             {
-                newPricePhone = shoppingPhone.Last() + phonePrice;
+                newPricePhone = shoppingTotalPrice.Last() + phonePrice;
 
                 if (shopping.MobilePhoneId == null)
                 {
-                    var cart = new ShoppingCart
-                    {
-                        MobilePhoneId = dto.PhoneId,
-                        MobilePhones = phone,
-                        User = currentUser,
-                        UserId = dto.UserId,
-                        AddTOCart = DateTime.Now,
-                        TotalPrice = newPricePhone,
-                    };
+                    var cart = this.factory
+                    .FillCartWithPhone(dto.ProductId, phone, currentUser, dto.UserId, newPricePhone);
 
                     phone.IsBought = true;
                     await this.context.ShoppingCarts.AddAsync(cart);
@@ -156,7 +108,7 @@ namespace TechnoForest_Service.Core
 
                     return true;
                 }
-                else if (shopping.MobilePhoneId.Contains(dto.PhoneId))
+                else if (shopping.MobilePhoneId.Contains(dto.ProductId))
                 {
                     shopping.TotalPrice = newPricePhone;
                     shopping.AddTOCart = DateTime.Now;
@@ -169,15 +121,8 @@ namespace TechnoForest_Service.Core
             else
             {
                 newPricePhone = phonePrice;
-                var cart = new ShoppingCart
-                {
-                    MobilePhoneId = dto.PhoneId,
-                    MobilePhones = phone,
-                    User = currentUser,
-                    UserId = dto.UserId,
-                    AddTOCart = DateTime.Now,
-                    TotalPrice = newPricePhone
-                };
+                var cart = this.factory
+                        .FillCartWithPhone(dto.ProductId, phone, currentUser, dto.UserId, newPricePhone);
 
                 phone.IsBought = true;
                 await this.context.ShoppingCarts.AddAsync(cart);
@@ -188,49 +133,29 @@ namespace TechnoForest_Service.Core
             return false;
         }
 
-        public async Task<bool> AddWashingMachineToCartAsync(WashingMachineDto dto)
+        public async Task<bool> AddWashingMachineToCartAsync(ProductDto dto)
         {
-            if (dto.WashingMichineId == null)
+            if (dto.ProductId == null)
             {
                 throw new ProductExeption("Washing machine does not exist!");
             }
 
-            var washingMachine = await this.context.WashingMachines
-                 .FirstOrDefaultAsync(wMachineId => wMachineId.Id == dto.WashingMichineId);
-
-            var currentUser = await this.context.Users
-                .FirstOrDefaultAsync(id => id.Id == dto.UserId);
-
-            var washingMachinePrice = await this.context.WashingMachines
-                .Where(wMachineId => wMachineId.Id == dto.WashingMichineId)
-                .Select(price => price.Price)
-                .FirstOrDefaultAsync();
-
-
-            var shoppingWashingMachine = await this.context.ShoppingCarts
-                .Where(user => user.UserId == dto.UserId)
-                .Select(price => price.TotalPrice).ToListAsync();
-
-            var shopping = await this.context.ShoppingCarts
-               .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+            var washingMachine = await this.repository.SearchWashingMachineById(dto.ProductId);
+            var currentUser = await this.repository.CurrentUserById(dto.UserId);
+            var washingMachinePrice = await this.repository.WashingMachinesCurrentPriceById(dto.ProductId);
+            var shoppingTotalPrice = await this.repository.GetTotalPriceFromShopingCartByCurrentUser(dto.UserId);
+            var shopping = await this.repository.GetShoppingCartUser(dto.UserId);
 
             decimal? newPriceWashingMachine = null;
 
-            if (shoppingWashingMachine.Count() != 0)
+            if (shoppingTotalPrice.Count() != 0)
             {
-                newPriceWashingMachine = shoppingWashingMachine.Last() + washingMachinePrice;
+                newPriceWashingMachine = shoppingTotalPrice.Last() + washingMachinePrice;
 
                 if (shopping.WashingMachineId == null)
                 {
-                    var cart = new ShoppingCart
-                    {
-                        WashingMachineId = dto.WashingMichineId,
-                        WashingMachines = washingMachine,
-                        User = currentUser,
-                        UserId = dto.UserId,
-                        AddTOCart = DateTime.Now,
-                        TotalPrice = newPriceWashingMachine,
-                    };
+                    var cart = this.factory
+                        .FillCartWithWashingMachine(dto.ProductId, washingMachine, currentUser, dto.UserId, newPriceWashingMachine);
 
                     washingMachine.IsBought = true;
                     await this.context.ShoppingCarts.AddAsync(cart);
@@ -238,7 +163,7 @@ namespace TechnoForest_Service.Core
 
                     return true;
                 }
-                else if (shopping.WashingMachineId.Contains(dto.WashingMichineId))
+                else if (shopping.WashingMachineId.Contains(dto.ProductId))
                 {
                     shopping.TotalPrice = newPriceWashingMachine;
                     shopping.AddTOCart = DateTime.Now;
@@ -252,15 +177,8 @@ namespace TechnoForest_Service.Core
             {
                 newPriceWashingMachine = washingMachinePrice;
 
-                var cart = new ShoppingCart
-                {
-                    WashingMachineId = dto.WashingMichineId,
-                    WashingMachines = washingMachine,
-                    User = currentUser,
-                    UserId = dto.UserId,
-                    AddTOCart = DateTime.Now,
-                    TotalPrice = newPriceWashingMachine
-                };
+                var cart = this.factory
+                         .FillCartWithWashingMachine(dto.ProductId, washingMachine, currentUser, dto.UserId, newPriceWashingMachine);
                 washingMachine.IsBought = true;
 
                 await this.context.ShoppingCarts.AddAsync(cart);
@@ -272,47 +190,28 @@ namespace TechnoForest_Service.Core
             return false;
         }
 
-        public async Task<bool> AddFridgeToCartAsync(FridgeDto dto)
+        public async Task<bool> AddFridgeToCartAsync(ProductDto dto)
         {
-            if (dto.FridgeId == null)
+            if (dto.ProductId == null)
             {
                 throw new ProductExeption("Fridge does not exist!");
             }
 
-            var fridge = await this.context.Fridges
-                 .FirstOrDefaultAsync(fridgeId => fridgeId.Id == dto.FridgeId);
-
-            var currentUser = await this.context.Users
-                .FirstOrDefaultAsync(id => id.Id == dto.UserId);
-
-            var fridgePrice = await this.context.Fridges
-                .Where(fridgeId => fridgeId.Id == dto.FridgeId)
-                .Select(price => price.Price)
-                .FirstOrDefaultAsync();
-
-            var shoppingfridge = await this.context.ShoppingCarts
-                .Where(user => user.UserId == dto.UserId)
-                .Select(price => price.TotalPrice).ToListAsync();
-
-            var shopping = await this.context.ShoppingCarts
-                .FirstOrDefaultAsync(user => user.UserId == dto.UserId);
+            var fridge = await this.repository.SearchFridgeById(dto.ProductId);
+            var currentUser = await this.repository.CurrentUserById(dto.UserId);
+            var fridgePrice = await this.repository.FridgesCurrentPriceById(dto.ProductId);
+            var shoppingTotalPrice = await this.repository.GetTotalPriceFromShopingCartByCurrentUser(dto.UserId);
+            var shopping = await this.repository.GetShoppingCartUser(dto.UserId);
 
             decimal? newPriceFridge = null;
-            if (shoppingfridge.Count() != 0)
+            if (shoppingTotalPrice.Count() != 0)
             {
-                newPriceFridge = shoppingfridge.Last() + fridgePrice;
+                newPriceFridge = shoppingTotalPrice.Last() + fridgePrice;
 
                 if (shopping.FridgeId == null)
                 {
-                    var cart = new ShoppingCart
-                    {
-                        FridgeId = dto.FridgeId,
-                        Fridge = fridge,
-                        User = currentUser,
-                        UserId = dto.UserId,
-                        AddTOCart = DateTime.Now,
-                        TotalPrice = newPriceFridge,
-                    };
+                    var cart = this.factory
+                        .FillCartWithFridge(dto.ProductId, fridge, currentUser, dto.UserId, newPriceFridge);
 
                     fridge.IsBought = true;
                     await this.context.ShoppingCarts.AddAsync(cart);
@@ -320,7 +219,7 @@ namespace TechnoForest_Service.Core
 
                     return true;
                 }
-                else if (shopping.FridgeId.Contains(dto.FridgeId))
+                else if (shopping.FridgeId.Contains(dto.ProductId))
                 {
                     shopping.TotalPrice = newPriceFridge;
                     shopping.AddTOCart = DateTime.Now;
@@ -334,16 +233,68 @@ namespace TechnoForest_Service.Core
             else
             {
                 newPriceFridge = fridgePrice;
-                var cart = new ShoppingCart
-                {
-                    FridgeId = dto.FridgeId,
-                    Fridge = fridge,
-                    User = currentUser,
-                    UserId = dto.UserId,
-                    AddTOCart = DateTime.Now,
-                    TotalPrice = newPriceFridge,
-                };
+
+                var cart = this.factory
+                       .FillCartWithFridge(dto.ProductId, fridge, currentUser, dto.UserId, newPriceFridge);
+
                 fridge.IsBought = true;
+                await this.context.ShoppingCarts.AddAsync(cart);
+                await this.context.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> AddAirConditionerToCartAsync(ProductDto dto)
+        {
+            if (dto.ProductId == null)
+            {
+                throw new ProductExeption("Air Conditioner does not exist!");
+            }
+
+            var airConditioner = await this.repository.SearchAirConditionerById(dto.ProductId);
+            var currentUser = await this.repository.CurrentUserById(dto.UserId);
+            var airConditionerPrice = await this.repository.AirConditionersCurrentPriceById(dto.ProductId);
+            var shoppingTotalPrice = await this.repository.GetTotalPriceFromShopingCartByCurrentUser(dto.UserId);
+            var shopping = await this.repository.GetShoppingCartUser(dto.UserId);
+
+            decimal? newPriceAirConditioner = null;
+            if (shoppingTotalPrice.Count() != 0)
+            {
+                newPriceAirConditioner = shoppingTotalPrice.Last() + airConditionerPrice;
+
+                if (shopping.FridgeId == null)
+                {
+                    var cart = this.factory
+                        .FillCartWithAirConditioner(dto.ProductId, airConditioner, currentUser, dto.UserId, newPriceAirConditioner);
+
+                    airConditioner.IsBought = true;
+                    await this.context.ShoppingCarts.AddAsync(cart);
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+                else if (shopping.AirConditionerId.Contains(dto.ProductId))
+                {
+                    shopping.TotalPrice = newPriceAirConditioner;
+                    shopping.AddTOCart = DateTime.Now;
+                    airConditioner.IsBought = true;
+
+                    await this.context.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+            else
+            {
+                newPriceAirConditioner = airConditionerPrice;
+
+                var cart = this.factory
+                        .FillCartWithAirConditioner(dto.ProductId, airConditioner, currentUser, dto.UserId, newPriceAirConditioner);
+
+                airConditioner.IsBought = true;
                 await this.context.ShoppingCarts.AddAsync(cart);
                 await this.context.SaveChangesAsync();
 
