@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using Microsoft.AspNetCore.Http;
 using TechnoForest_Service.Core;
+using TechnoForest_Service.TechnoForestFactory;
 
 namespace TechnoForest
 {
@@ -57,7 +58,8 @@ namespace TechnoForest
             services.AddTransient<IProductService, ProductService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ISearchService, SearchService>();
+            services.AddScoped<IRepositoryForest, RepositoryForest>();
+            services.AddScoped<IFactory, Factory>();
 
 
             services.ConfigureApplicationCookie(options =>

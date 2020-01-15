@@ -38,9 +38,9 @@ namespace TechnoForest.Controllers
         [HttpGet]
         public async Task<IActionResult> AddPhoneToCart(string id)
         {
-            var dto = new MobilePhoneDto
+            var dto = new ProductDto
             {
-                PhoneId = id,
+                ProductId = id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
@@ -63,9 +63,9 @@ namespace TechnoForest.Controllers
         [HttpGet]
         public async Task<IActionResult> AddWashingMachineToCart(string id)
         {
-            var dto = new WashingMachineDto
+            var dto = new ProductDto
             {
-                WashingMichineId = id,
+                ProductId = id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
@@ -88,9 +88,9 @@ namespace TechnoForest.Controllers
         [HttpGet]
         public async Task<IActionResult> AddTvToCart(string id)
         {
-            var dto = new TvDto
+            var dto = new ProductDto
             {
-                TvId = id,
+                ProductId = id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
@@ -113,9 +113,9 @@ namespace TechnoForest.Controllers
         [HttpGet]
         public async Task<IActionResult> AddFridgeToCart(string id)
         {
-            var dto = new FridgeDto
+            var dto = new ProductDto
             {
-                FridgeId = id,
+                ProductId = id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
@@ -140,6 +140,22 @@ namespace TechnoForest.Controllers
             var listAirConditioner = new ListAirConditionerViewModel(allAirConditioner);
 
             return View(listAirConditioner);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AddAirConditionerToCart(string id)
+        {
+            var dto = new ProductDto
+            {
+                ProductId = id,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            await this.shopping.AddAirConditionerToCartAsync(dto);
+
+            return RedirectToAction("ShowAirConditioner", "Product");
         }
 
     }

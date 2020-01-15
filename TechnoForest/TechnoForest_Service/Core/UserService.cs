@@ -11,8 +11,8 @@ namespace TechnoForest_Service.Core
     public class UserService : IUserService
     {
         private readonly TechnoForestContext context;
-        private readonly ISearchService service;
-        public UserService(TechnoForestContext context, ISearchService service)
+        private readonly IRepositoryForest service;
+        public UserService(TechnoForestContext context, IRepositoryForest service)
         {
             this.context = context;
             this.service = service;
@@ -52,7 +52,8 @@ namespace TechnoForest_Service.Core
                  .FirstOrDefaultAsync();
 
                 var item = await this.context.ShoppingCarts.Where(id => id.FridgeId == itemId ||
-                id.TVsId == itemId || id.WashingMachineId == itemId || id.MobilePhoneId == itemId)
+                id.TVsId == itemId || id.WashingMachineId == itemId || id.MobilePhoneId == itemId 
+                || id.AirConditionerId == itemId)
                     .SingleOrDefaultAsync();
 
                 var result = tottalPrice.Last();
@@ -76,6 +77,8 @@ namespace TechnoForest_Service.Core
                 var tv = await this.service.SearchTvById(itemId);
                 var washingMachine = await service.SearchWashingMachineById(itemId);
                 var fridge = await this.service.SearchFridgeById(itemId);
+                var airConditioner = await this.service.SearchAirConditionerById(itemId);
+
 
                 var tottalPrice =
                  await this.context.ShoppingCarts.Where(userId => userId.UserId == dto.UserId)
@@ -106,6 +109,10 @@ namespace TechnoForest_Service.Core
                 else if (fridge != null)
                 {
                     fridge.IsBought = false;
+                }
+                else if (airConditioner != null)
+                {
+                    airConditioner.IsBought = false;
                 }
 
                 //   await this.context.SaveChangesAsync();

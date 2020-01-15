@@ -87,6 +87,20 @@
                     </td>
                 </tr>
             }
+
+            @if (item.AirConditioner != null && item.AirConditioner.IsBought == true)
+            {
+                <tr>
+                    <td>@item.AirConditioner.ProductName - @item.AirConditioner.Model</td>
+                    <td>Price for product is: @item.AirConditioner.Price</td>
+                    <td>
+                        <button style="background-color:#34495e" id="buyItem" value="@item.AirConditioner.Id @item.AirConditioner.Price" class="btn btn-primary">Buy Item</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#34495e" id="rejectItem" value="@item.AirConditioner.Id @item.AirConditioner.Price" class="btn btn-primary">Reject Item</button>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

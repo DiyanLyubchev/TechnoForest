@@ -16,7 +16,7 @@
     <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Fridge Model</th>
+            <th scope="col">Model</th>
             <th scope="col">Power Cooling</th>
             <th scope="col">Power Heating</th>
             <th scope="col">Noise Level</th>
@@ -39,9 +39,9 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <td> <a asp-controller="Product" asp-action="AddFridgeToCart" asp-route-id="@air.Id"><button style="background-color:#34495e" class="btn btn-primary">Аdded to cart</button></a></td>
+                    <td> <a asp-controller="Product" asp-action="AddAirConditionerToCart" asp-route-id="@air.Id"><button style="background-color:#34495e" class="btn btn-primary">Аdded to cart</button></a></td>
                 }
             </tr>
         }
     </tbody>
-
+</table>

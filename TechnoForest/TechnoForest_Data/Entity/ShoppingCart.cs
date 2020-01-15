@@ -20,13 +20,13 @@ namespace TechnoForest_Data.Entity
         public virtual TV TVs { get; set; }
 
         [ForeignKey("WashingMachine")]
-        public string WashingMachineId  { get; set; }
+        public string WashingMachineId { get; set; }
 
         public virtual WashingMachine WashingMachines { get; set; }
 
 
         [ForeignKey("MobilePhone")]
-        public string MobilePhoneId  { get; set; } 
+        public string MobilePhoneId { get; set; }
 
         public virtual MobilePhone MobilePhones { get; set; }
 
@@ -51,6 +51,6 @@ namespace TechnoForest_Data.Entity
         public decimal? TotalPrice { get; set; }
 
         public DateTime? AddTOCart { get; set; }
-       
+
     }
 }
