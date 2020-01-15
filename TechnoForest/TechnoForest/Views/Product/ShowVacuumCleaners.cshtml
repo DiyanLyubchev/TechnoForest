@@ -6,7 +6,7 @@
 }
 
 @using System.Security.Claims;
-<p>Result: @Model.Vacuums.Count()</p>
+<p style="color:white">Result: @Model.Vacuums.Count()</p>
 
 <strong>
     <a asp-controller="Home" asp-action="Index" style="color: #0094ff">Go back</a>
@@ -15,12 +15,12 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col"></th>
-            <th scope="col">Model</th>
-            <th scope="col">Power</th>
-            <th scope="col">Noise level</th>
-            <th scope="col">Color</th>
-            <th scope="col">Price</th>
+            <th style="color:white" scope="col"></th>
+            <th style="color:white" scope="col">Model</th>
+            <th style="color:white" scope="col">Power</th>
+            <th style="color:white" scope="col">Noise level</th>
+            <th style="color:white" scope="col">Color</th>
+            <th style="color:white" scope="col">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -28,13 +28,13 @@
         {
             <tr>
                 <td>
-                    <img class="Phone" src="~/Images/VacuumCleanerShowRoom.jpg" />
+                    <img class="Phone" src="~/Images/VacuumCleanerShowRoom.png" />
                 </td>
-                <td>@vacuum.ProductName - @vacuum.Model</td>
-                <td>@vacuum.Power</td>
-                <td>@vacuum.NoiseLevel dB</td>
-                <td>@vacuum.Color</td>
-                <td>@vacuum.Price</td>
+                <td style="color:white">@vacuum.ProductName - @vacuum.Model</td>
+                <td style="color:white">@vacuum.Power</td>
+                <td style="color:white">@vacuum.NoiseLevel dB</td>
+                <td style="color:white">@vacuum.Color</td>
+                <td style="color:white">@vacuum.Price</td>
 
                 @if (User.Identity.IsAuthenticated)
                 {

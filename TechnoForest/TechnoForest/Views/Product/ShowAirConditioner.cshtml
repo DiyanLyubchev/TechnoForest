@@ -6,7 +6,7 @@
 }
 
 @using System.Security.Claims;
-<p>Result: @Model.Air.Count()</p>
+<p style="color:white">Result: @Model.Air.Count()</p>
 
 <strong>
     <a asp-controller="Home" asp-action="Index" style="color: #0094ff">Go back</a>
@@ -16,11 +16,11 @@
     <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Model</th>
-            <th scope="col">Power Cooling</th>
-            <th scope="col">Power Heating</th>
-            <th scope="col">Noise Level</th>
-            <th scope="col">Price</th>
+            <th scope="col" style="color:white">Model</th>
+            <th scope="col" style="color:white">Power Cooling</th>
+            <th scope="col" style="color:white">Power Heating</th>
+            <th scope="col" style="color:white">Noise Level</th>
+            <th scope="col" style="color:white">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -28,13 +28,13 @@
         {
             <tr>
                 <td>
-                    <img class="Phone" src="~/Images/show_room_air_conditioners_1800btu.jpg" />
+                    <img class="Phone"src="~/Images/show_room_air_conditioners_1800btu.png" />
                 </td>
-                <td>@air.ProductName - @air.Model</td>
-                <td>@air.PowerCooling</td>
-                <td>@air.PowerHeating</td>
-                <td>@air.NoiseLevel dB</td>
-                <td>@air.Price</td>
+                <td style="color:white">@air.ProductName - @air.Model</td>
+                <td style="color:white">@air.PowerCooling</td>
+                <td style="color:white">@air.PowerHeating</td>
+                <td style="color:white">@air.NoiseLevel dB</td>
+                <td style="color:white">@air.Price</td>
          
 
                 @if (User.Identity.IsAuthenticated)

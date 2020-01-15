@@ -6,7 +6,7 @@
 }
 
 @using System.Security.Claims;
-<p>Result: @Model.Fridges.Count()</p>
+<p style="color:white">Result: @Model.Fridges.Count()</p>
 
 <strong>
     <a asp-controller="Home" asp-action="Index" style="color: #0094ff">Go back</a>
@@ -16,14 +16,14 @@
     <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Model</th>
-            <th scope="col">Total Capacity</th>
-            <th scope="col">Capacity Refrigerator</th>
-            <th scope="col">Capacity Freezer</th>
-            <th scope="col">Color</th>
-            <th scope="col">Height</th>
-            <th scope="col">Width</th>
-            <th scope="col">Price</th>
+            <th scope="col" style="color:white">Model</th>
+            <th scope="col" style="color:white">Total Capacity</th>
+            <th scope="col" style="color:white">Capacity Refrigerator</th>
+            <th scope="col" style="color:white">Capacity Freezer</th>
+            <th scope="col" style="color:white">Color</th>
+            <th scope="col" style="color:white">Height</th>
+            <th scope="col" style="color:white">Width</th>
+            <th scope="col" style="color:white">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -33,14 +33,14 @@
                 <td>
                     <img class="Phone" src="~/Images/fridges-product.png" />
                 </td>
-                <td>@fridge.ProductName - @fridge.Model</td>
-                <td>@fridge.TotalCapacity</td>
-                <td>@fridge.CapacityRefrigerator</td>
-                <td>@fridge.CapacityFreezer</td>
-                <td>@fridge.Color</td>
-                <td>@fridge.Height Sm</td>
-                <td>@fridge.Width Sm</td>
-                <td>@fridge.Price</td>
+                <td style="color:white">@fridge.ProductName - @fridge.Model</td>
+                <td style="color:white">@fridge.TotalCapacity</td>
+                <td style="color:white">@fridge.CapacityRefrigerator</td>
+                <td style="color:white">@fridge.CapacityFreezer</td>
+                <td style="color:white">@fridge.Color</td>
+                <td style="color:white">@fridge.Height Sm</td>
+                <td style="color:white">@fridge.Width Sm</td>
+                <td style="color:white">@fridge.Price</td>
 
                 @if (User.Identity.IsAuthenticated)
                 {

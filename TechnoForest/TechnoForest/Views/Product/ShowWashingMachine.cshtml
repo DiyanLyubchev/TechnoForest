@@ -6,19 +6,19 @@
 }
 
 @using System.Security.Claims;
-<p>Result: @Model.WashingMashine.Count()</p>
+<p style="color:white">Result: @Model.WashingMashine.Count()</p>
 
-<strong>
+<strong >
     <a asp-controller="Home" asp-action="Index" style="color: #0094ff" >Go back</a>
 </strong>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col"></th>
-            <th scope="col">Model</th>
-            <th scope="col">Capacity</th>
-            <th scope="col">Price</th>
+            <th style="color:white" scope="col"></th>
+            <th style="color:white" scope="col">Model</th>
+            <th style="color:white" scope="col">Capacity</th>
+            <th style="color:white" scope="col">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@
         {
         <tr>
             <td>
-                <img class="Phone" src="~/Images/washingMachine_HomePage.png" />
+                <img class="Phone" src="~/Images/washingMachine.png" />
             </td>
             <td>@washingMachine.ProductName - @washingMachine.Model</td>
             <td>@washingMachine.WashingCapacity Kg</td>
