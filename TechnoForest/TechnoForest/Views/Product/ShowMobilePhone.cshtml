@@ -4,7 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using System.Security.Claims;
-<p>Result: @Model.Phone.Count()</p>
+    <head>
+        @*<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    </head>
+<p style="color:white">Result: @Model.Phone.Count()</p>
 <body>
     <strong>
         <a asp-controller="Home" asp-action="Index" style="color:#0094ff">Go back</a>
@@ -13,31 +19,37 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">Model</th>
-                <th scope="col">Display size</th>
-                <th scope="col">Memory</th>
-                <th scope="col">Color</th>
-                <th scope="col">Price</th>
+                <th scope="col" style="color:white">Model</th>
+                <th scope="col" style="color:white">Display size</th>
+                <th scope="col" style="color:white">Memory</th>
+                <th scope="col" style="color:white">Color</th>
+                <th scope="col" style="color:white">Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var phone in Model.Phone)
             {
-                <tr>
-                    <td>
-                        <img class="Phone" src="~/Images/Xgray.jpg" alt="Sample Photo" />
-                    </td>
-                    <td>@phone.ProductName - @phone.Model</td>
-                    <td>@phone.SizeOfDisplay</td>
-                    <td>@phone.Memory</td>
-                    <td>@phone.Color</td>
-                    <td>@phone.Price</td>
+            <tr>
+                <td>
+                    <img class="Phone" src="~/Images/Black7Plus.png"  alt="Sample Photo" />
+                </td>
+                <td style="color:white">@phone.ProductName - @phone.Model</td>
+                <td style="color:white">@phone.SizeOfDisplay</td>
+                <td style="color:white">@phone.Memory</td>
+                <td style="color:white">@phone.Color</td>
+                <td style="color:white">@phone.Price</td>
 
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary">Аdded to cart</button></a></td>
-                    }
-                </tr>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> <a asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id"><button style="background-color:#34495e" class="btn btn-primary">Аdded to cart</button></a></td>
+
+                    @*<td>
+                        <button asp-controller="Product" asp-action="AddPhoneToCart" asp-route-id="@phone.Id" type="button" class="btn btn-default btn-sm" style="background-color: cornflowerblue">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                        </button>
+                    </td>*@
+                }
+            </tr>
             }
         </tbody>
     </table>

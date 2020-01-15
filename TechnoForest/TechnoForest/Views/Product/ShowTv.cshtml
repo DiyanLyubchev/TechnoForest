@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using System.Security.Claims;
-<p>Result: @Model.Tvs.Count()</p>
+<p style="color:white">Result: @Model.Tvs.Count()</p>
 
 <strong>
     <a asp-controller="Home" asp-action="Index" style="color: #0094ff">Go back</a>
@@ -15,9 +15,9 @@
     <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Model</th>
-            <th scope="col"> Diagonal display</th>
-            <th scope="col">Price</th>
+            <th style="color:white" scope="col">Model</th>
+            <th style="color:white" scope="col"> Diagonal display</th>
+            <th style="color:white" scope="col">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -25,11 +25,11 @@
         {
         <tr>
             <td>
-                <img class="TV" src="~/Images/TvShowRoom.jpg" />
+                <img class="TV" src="~/Images/B0550780806.png" />
             </td>
-            <td>@tv.ProductName - @tv.Model</td>
-            <td>@tv.Size sm</td>
-            <td>@tv.Price</td>
+            <td style="color:white">@tv.ProductName - @tv.Model</td>
+            <td style="color:white">@tv.Size sm</td>
+            <td style="color:white">@tv.Price</td>
 
             @if (User.Identity.IsAuthenticated)
             {

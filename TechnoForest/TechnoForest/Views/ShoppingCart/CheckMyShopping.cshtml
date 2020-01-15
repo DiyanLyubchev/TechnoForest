@@ -14,15 +14,15 @@
     {
         resultOfTotalPrice = sum.Last();
     }
-    <h5>
-        Sum of total price is: <span style="color:green">@resultOfTotalPrice</span> BGN
+    <h5 style="color:white">
+        Sum of total price is: @resultOfTotalPrice BGN
     </h5>
 }
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">Item Model</th>
-            <th scope="col">Price</th>
+            <th style="color:white" scope="col">Item Model</th>
+            <th style="color:white" scope="col">Price</th>
             <th></th>
             <th></th>
         </tr>
@@ -34,8 +34,8 @@
             @if (item.MobilePhones != null && item.MobilePhones.IsBought == true)
             {
                 <tr>
-                    <td>@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
-                    <td>Price for product is: @item.MobilePhones.Price</td>
+                    <td style="color:white">@item.MobilePhones.ProductName - @item.MobilePhones.Model</td>
+                    <td style="color:white">Price for product is: @item.MobilePhones.Price</td>
                     <td>
                         <button style="background-color:#34495e" id="buyItem" value="@item.MobilePhones.Id @item.MobilePhones.Price" class="btn btn-primary">Buy Item</button>
                     </td>
@@ -48,8 +48,8 @@
             @if (item.TVs != null && item.TVs.IsBought == true)
             {
                 <tr>
-                    <td>@item.TVs.ProductName - @item.TVs.Model</td>
-                    <td>Price for product is: @item.TVs.Price</td>
+                    <td style="color:white">@item.TVs.ProductName - @item.TVs.Model</td>
+                    <td style="color:white">Price for product is: @item.TVs.Price</td>
                     <td>
                         <button style="background-color:#34495e" id="buyItem" value="@item.TVs.Id @item.TVs.Price" class="btn btn-primary">Buy Item</button>
                     </td>
@@ -62,8 +62,8 @@
             @if (item.WashingMachines != null && item.WashingMachines.IsBought == true)
             {
                 <tr>
-                    <td>@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
-                    <td>Price for product is: @item.WashingMachines.Price</td>
+                    <td style="color:white">@item.WashingMachines.ProductName - @item.WashingMachines.Model</td>
+                    <td style="color:white">Price for product is: @item.WashingMachines.Price</td>
                     <td>
                         <button style="background-color:#34495e" id="buyItem" value="@item.WashingMachines.Id @item.WashingMachines.Price" class="btn btn-primary">Buy Item</button>
                     </td>
@@ -77,8 +77,8 @@
             @if (item.Fridge != null && item.Fridge.IsBought == true)
             {
                 <tr>
-                    <td>@item.Fridge.ProductName - @item.Fridge.Model</td>
-                    <td>Price for product is: @item.Fridge.Price</td>
+                    <td style="color:white">@item.Fridge.ProductName - @item.Fridge.Model</td>
+                    <td style="color:white">Price for product is: @item.Fridge.Price</td>
                     <td>
                         <button style="background-color:#34495e" id="buyItem" value="@item.Fridge.Id @item.Fridge.Price" class="btn btn-primary">Buy Item</button>
                     </td>
@@ -91,7 +91,8 @@
             @if (item.AirConditioner != null && item.AirConditioner.IsBought == true)
             {
                 <tr>
-                    <td>@item.AirConditioner.ProductName - @item.AirConditioner.Model</td>
+                    <td style="color:white" >@item.AirConditioner.ProductName - @item.AirConditioner.Model</td>
+                    <td style="color:white">@item.AirConditioner.ProductName - @item.AirConditioner.Model</td>
                     <td>Price for product is: @item.AirConditioner.Price</td>
                     <td>
                         <button style="background-color:#34495e" id="buyItem" value="@item.AirConditioner.Id @item.AirConditioner.Price" class="btn btn-primary">Buy Item</button>
